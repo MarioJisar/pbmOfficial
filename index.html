@@ -1,99 +1,39 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Club de Fútbol</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="scripts.js"></script>
+<!-- Sección de Noticias en el HTML -->
+<section id="noticias">
+  <h2>Noticias</h2>
+  <div id="contenedor-noticias"></div>
+</section>
 
-</head>
-<body>
-  <header>
-    <div class="carousel">
-      <img src="img/portada1.jpg" alt="Celebración de gol">
-      <img src="img/portada2.jpg" alt="Equipo en el campo">
-    </div>
-  </header>
+<!-- Script para cargar noticias desde JSON -->
+<script>
+  async function cargarNoticiasTemporales() {
+    try {
+      const response = await fetch('noticias.json');
+      const noticias = await response.json();
+      const ahora = new Date();
+      const contenedor = document.getElementById('contenedor-noticias');
 
-  <main>
-    <section id="noticias">
-      <h2>Últimas Noticias</h2>
-      <article>
-        <time datetime="2024-04-22">22 Abr 2024</time>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </article>
-      <article>
-        <time datetime="2024-04-20">20 Abr 2024</time>
-        <p>Curabitur ac est at quam fermentum blandit.</p>
-      </article>
-    </section>
+      noticias.forEach(noticia => {
+        const inicio = new Date(noticia.inicio);
+        const fin = new Date(noticia.fin);
 
-    <section id="proximos-partidos">
-      <h2>Próximos Partidos</h2>
-      <ul>
-        <li>
-          <span>Equipo vs Rival</span>
-          <time datetime="2024-06-15T18:00">15 Jun 2024, 18:00</time>
-          <a href="#">Añadir al calendario</a>
-        </li>
-        <!-- Más partidos -->
-      </ul>
-    </section>
+        if (ahora >= inicio && ahora <= fin) {
+          const article = document.createElement('article');
+          const titulo = document.createElement('h3');
+          const contenido = document.createElement('p');
 
-    <section id="clasificacion">
-      <h2>Clasificación</h2>
-      <table>
-        <thead>
-          <tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>Puntos</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>1</td><td>Treire</td><td>12</td><td>9</td><td>1</td><td>3</td><td>23</td></tr>
-          <!-- Más filas -->
-        </tbody>
-      </table>
-    </section>
+          titulo.textContent = noticia.titulo;
+          contenido.textContent = noticia.contenido;
 
-    <section id="equipaciones">
-      <h2>Equipaciones</h2>
-      <img src="img/home-kit.png" alt="Equipación local">
-      <img src="img/away-kit.png" alt="Equipación visitante">
-    </section>
+          article.appendChild(titulo);
+          article.appendChild(contenido);
+          contenedor.appendChild(article);
+        }
+      });
+    } catch (error) {
+      console.error('Error al cargar las noticias:', error);
+    }
+  }
 
-    <section id="social">
-      <h2>Redes Sociales</h2>
-      <p><strong>@clubfutbol</strong>: ¡Gran victoria este fin de semana! ⚽</p>
-      <!-- más publicaciones -->
-    </section>
-
-    <section id="plantilla">
-      <h2>Plantilla</h2>
-      <div class="jugadores">
-        <div class="jugador">
-          <img src="img/player1.jpg" alt="Jugador 1">
-          <p>Jugador 1</p>
-        </div>
-        <!-- Más jugadores -->
-      </div>
-    </section>
-
-    <section id="galeria">
-      <h2>Galería</h2>
-      <div class="imagenes">
-        <img src="img/galeria1.jpg" alt="Foto del equipo">
-        <img src="img/galeria2.jpg" alt="Celebración">
-        <!-- Más fotos -->
-      </div>
-    </section>
-
-    <section id="historia">
-      <h2>Historia del Club</h2>
-      <p>Fundado en 1920, el Club de Fútbol ha sido un emblema de la ciudad por más de 100 años...</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Club de Fútbol. Todos los derechos reservados.</p>
-  </footer>
-</body>
-</html>
+  document.addEventListener('DOMContentLoaded', cargarNoticiasTemporales);
+</script>
