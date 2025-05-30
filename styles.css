@@ -106,3 +106,30 @@ footer {
   padding: 15px;
   margin-top: 40px;
 }
+
+/* Script para mostrar noticias temporales */
+
+#noticias h2 + div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#noticias article {
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+  #equipaciones img,
+  #galeria .imagenes img {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  #plantilla .jugador {
+    width: 100%;
+  }
+}
