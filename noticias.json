@@ -1,0 +1,14 @@
+[
+  {
+    "titulo": "Victoria épica en casa",
+    "contenido": "El equipo ganó 3-2 con un gol en el último minuto.",
+    "inicio": "2025-05-28T00:00:00",
+    "fin": "2025-06-05T23:59:59"
+  },
+  {
+    "titulo": "Entrenamiento abierto",
+    "contenido": "Ven a ver al equipo entrenar este sábado a las 10h.",
+    "inicio": "2025-06-01T00:00:00",
+    "fin": "2025-06-03T23:59:59"
+  }
+]
