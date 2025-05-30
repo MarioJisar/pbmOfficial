@@ -1,4 +1,5 @@
-  async function cargarNoticiasTemporales() {
+/*
+async function cargarNoticiasTemporales() {
     try {
       const response = await fetch('noticias.json');
       const noticias = await response.json();
@@ -28,3 +29,4 @@
   }
 
   document.addEventListener('DOMContentLoaded', cargarNoticiasTemporales);
+*/
