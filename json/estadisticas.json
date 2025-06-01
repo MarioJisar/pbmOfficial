@@ -1,0 +1,5 @@
+[
+  { "nombre": "Victor", "goles": 12, "asistencias": 8, "mvps": 5 },
+  { "nombre": "Lucas", "goles": 9, "asistencias": 11, "mvps": 3 },
+  { "nombre": "Marcos", "goles": 7, "asistencias": 4, "mvps": 6 }
+]
