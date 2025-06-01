@@ -1,0 +1,22 @@
+[
+  {
+    "posicion": 1,
+    "equipo": "Club A",
+    "puntos": 72
+  },
+  {
+    "posicion": 2,
+    "equipo": "Club B",
+    "puntos": 68
+  },
+  {
+    "posicion": 3,
+    "equipo": "PBM 2.0",
+    "puntos": 65
+  },
+  {
+    "posicion": 4,
+    "equipo": "CLub D",
+    "puntos": 62
+  }
+]
