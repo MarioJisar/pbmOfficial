@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       thead.innerHTML = `
         <tr>
           <th>Jugador</th>
+          <th>Partidos asistidos</th>
           <th>Goles</th>
           <th>Asistencias</th>
           <th>MVPs</th>
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td>${jugador.nombre}</td>
+          <td>${jugador.partidos_asistidos}</td>
           <td>${jugador.goles}</td>
           <td>${jugador.asistencias}</td>
           <td>${jugador.mvps}</td>`;
