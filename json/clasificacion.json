@@ -1,22 +1,30 @@
 [
   {
-    "posicion": 1,
     "equipo": "Club A",
-    "puntos": 72
+    "partidos_jugados": 7,
+    "victorias": 4,
+    "derrotas": 1,
+    "empates": 2
   },
   {
-    "posicion": 2,
     "equipo": "Club B",
-    "puntos": 68
+    "partidos_jugados": 7,
+    "victorias": 5,
+    "derrotas": 1,
+    "empates": 1
   },
   {
-    "posicion": 3,
     "equipo": "PBM 2.0",
-    "puntos": 65
+    "partidos_jugados": 7,
+    "victorias": 2,
+    "derrotas": 3,
+    "empates": 2
   },
   {
-    "posicion": 4,
-    "equipo": "CLub D",
-    "puntos": 62
+    "equipo": "CLub C",
+    "partidos_jugados": 7,
+    "victorias": 1,
+    "derrotas": 6,
+    "empates": 0
   }
 ]
