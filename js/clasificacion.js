@@ -1,33 +1,41 @@
 // js/clasificacion.js
 
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("json/clasificacion.json")
-    .then(res => res.json())
-    .then(datos => {
-      const contenedor = document.getElementById("tabla-clasificacion");
-      const tabla = document.createElement("table");
+fetch('json/clasificacion.json')
+  .then(response => response.json())
+  .then(data => mostrarClasificacion(data));
 
-      const thead = document.createElement("thead");
-      thead.innerHTML = `
+function mostrarClasificacion(equipos) {
+  // Calculamos puntos y ordenamos
+  equipos.forEach(equipo => {
+    equipo.puntos = equipo.victorias * 3 + equipo.empates;
+  });
+
+  equipos.sort((a, b) => b.puntos - a.puntos);
+
+  const tabla = document.querySelector('#clasificacion table');
+  tabla.innerHTML = `
+    <thead>
+      <tr>
+        <th>Posición</th>
+        <th>Equipo</th>
+        <th>PJ</th>
+        <th>PG</th>
+        <th>PE</th>
+        <th>PP</th>
+        <th>Puntos</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${equipos.map((equipo, index) => `
         <tr>
-          <th>Posición</th>
-          <th>Equipo</th>
-          <th>Puntos</th>
-        </tr>`;
-      tabla.appendChild(thead);
-
-      const tbody = document.createElement("tbody");
-      datos.forEach(fila => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${fila.posicion}</td>
-          <td>${fila.equipo}</td>
-          <td>${fila.puntos}</td>`;
-        tbody.appendChild(tr);
-      });
-
-      tabla.appendChild(tbody);
-      contenedor.appendChild(tabla);
-    })
-    .catch(err => console.error("Error cargando la clasificación:", err));
-});
+          <td>${index + 1}</td>
+          <td>${equipo.equipo}</td>
+          <td>${equipo.partidos_jugados}</td>
+          <td>${equipo.victorias}</td>
+          <td>${equipo.empates}</td>
+          <td>${equipo.derrotas}</td>
+          <td>${equipo.puntos}</td>
+        </tr>`).join('')}
+    </tbody>
+  `;
+}
