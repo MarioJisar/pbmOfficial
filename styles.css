@@ -50,9 +50,9 @@ section {
 }
 
 h2 {
-  border-bottom: 2px solid #0077cc;
+  border-bottom: 2px solid #cc00ad;
   padding-bottom: 5px;
-  color: #0077cc;
+  color: #cc00ad;
 }
 
 #noticias article,
@@ -116,7 +116,7 @@ footer {
 }
 
 #noticias article {
-  background-color: white;
+  background-color: rgb(181, 234, 250);
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
