@@ -3,12 +3,30 @@
     "equipoLocal": "PBM 2.0",
     "equipoVisitante": "Pataditas FC",
     "fecha": "2025-05-31T18:00:00",
-    "lugar": "La Granadilla"
+    "fin": "2025-05-31T19:00:00",
+    "lugar": "La Granadilla",
+    "resultado": "4 - 4"
   },
   {
     "equipoLocal": "Zirdam",
-    "equipoVisitante": "PBM 2.O",
-    "fecha": "2025-06-07T17:00:00",
+    "equipoVisitante": "PBM 2.0",
+    "fecha": "2025-06-02T20:00:00",
+    "fin": "2025-06-07T18:00:00",
+    "lugar": "La Granadilla"
+  },
+  {
+    "equipoLocal": "PBM 2.0",
+    "equipoVisitante": "Pataditas FC",
+    "fecha": "2025-05-31T18:00:00",
+    "fin": "2025-05-31T19:00:00",
+    "lugar": "La Granadilla",
+    "resultado":"4 - 4"
+  },
+  {
+    "equipoLocal": "Zirdam",
+    "equipoVisitante": "PBM 2.0",
+    "fecha": "2025-06-02T19:00:00",
+    "fin": "2025-06-07T18:00:00",
     "lugar": "La Granadilla"
   }
 ]
