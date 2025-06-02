@@ -19,6 +19,21 @@ body {
   line-height: 1.6;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/a578cb51030333.58e045f7ca9d6.gif"); /* Reemplaza con tu gif */
+  background-size: cover;
+  background-position: center;
+  opacity: 0.1; /* Ajusta para hacerlo más o menos tenue */
+  pointer-events: none; /* Para que no interfiera con los clics */
+  z-index: -1; /* Detrás de todo */
+}
+
 a {
   color: #4381c1;
   text-decoration: none;
