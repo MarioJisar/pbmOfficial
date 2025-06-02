@@ -1,67 +1,140 @@
-// js/partidos.js
-
 document.addEventListener("DOMContentLoaded", () => {
+  const divProximos = document.getElementById("lista-partidos");
+  const divJugados = document.getElementById("partidos-jugados");
+
   fetch("json/partidos.json")
     .then(res => res.json())
     .then(partidos => {
-      const listaProximos = document.getElementById("lista-partidos");
-      const listaJugados = document.getElementById("partidos-jugados");
       const ahora = new Date();
 
-      const partidosFuturos = [];
-      const partidosPasados = [];
+      const jugados = partidos
+        .filter(p => new Date(p.fin) < ahora)
+        .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
+        .slice(0, 2);
 
-      partidos.forEach(partido => {
-        const inicio = new Date(partido.fecha);
-        const fin = new Date(partido.fin);
+      const proximos = partidos
+        .filter(p => new Date(p.fecha) > ahora)
+        .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
+        .slice(0, 2);
 
-        const enDirecto = ahora >= inicio && ahora <= fin;
-        const yaJugado = ahora > fin;
+      // Jugados
+      divJugados.innerHTML = "";
+      if (jugados.length === 0) {
+        divJugados.innerHTML = `<div class="partido vacio">Sin partidos recientes</div>`;
+      } else {
+        jugados.forEach(p => divJugados.appendChild(crearPartidoJugado(p)));
+        completarLista(divJugados, 2, "Sin partidos recientes");
+      }
 
-        // Construcción visual
-        const li = document.createElement("li");
-        let html = `
-          <strong>${partido.equipoLocal} vs ${partido.equipoVisitante}</strong><br>
-          ${inicio.toLocaleString()} - ${partido.lugar}<br>
-        `;
+      // Próximos
+      divProximos.innerHTML = "";
+      if (proximos.length === 0) {
+        divProximos.innerHTML = `<div class="partido vacio">Sin próxima fecha</div><div class="partido vacio">Hasta la próxima temporada...</div>`;
+      } else {
+        proximos.forEach(p => divProximos.appendChild(crearPartidoProximo(p)));
+        completarLista(divProximos, 2, "Hasta la próxima temporada...");
+      }
 
-        if (enDirecto) {
-          html += `<span style="color: red; font-weight: bold;">🔴 EN DIRECTO</span><br>`;
-        }
-
-        if (yaJugado && partido.resultado) {
-          html += `<span style="font-weight: bold;">Resultado:</span> ${partido.resultado}<br>`;
-        }
-
-        li.innerHTML = html;
-
-        if (!yaJugado) {
-          const btn = document.createElement("button");
-          btn.textContent = "Añadir al calendario";
-          btn.addEventListener("click", () => crearICS(partido));
-          li.appendChild(btn);
-          partidosFuturos.push({ fecha: inicio, elemento: li });
-        } else {
-          partidosPasados.push({ fecha: inicio, elemento: li });
-        }
-      });
-
-      // Ordenar
-      partidosFuturos.sort((a, b) => a.fecha - b.fecha); // ascendente
-      partidosPasados.sort((a, b) => b.fecha - a.fecha); // descendente
-
-      // Pintar
-      partidosFuturos.forEach(p => listaProximos.appendChild(p.elemento));
-      partidosPasados.forEach(p => listaJugados.appendChild(p.elemento));
+      // Actualización periódica para mostrar si hay partidos en directo
+      setInterval(() => actualizarPartidosEnDirecto(proximos, divProximos), 30_000);
     })
     .catch(err => console.error("Error cargando partidos:", err));
 });
 
+function crearPartidoProximo(partido) {
+  const div = document.createElement("div");
+  div.classList.add("partido");
+
+  const fecha = formatearFecha(partido.fecha);
+  const directo = estaEnDirecto(partido) ? `<span class="directo">🔴 EN DIRECTO</span>` : "";
+
+  div.innerHTML = `
+    <strong>${partido.equipoLocal} vs ${partido.equipoVisitante}</strong>
+    <div class="info">${partido.jornada || ""} - ${partido.competicion || ""}</div>
+    <div class="fecha">${fecha} - ${partido.lugar}</div>
+    ${directo}
+  `;
+
+  const btn = document.createElement("button");
+  btn.textContent = "Añadir al calendario";
+  btn.addEventListener("click", () => crearICS(partido));
+  div.appendChild(btn);
+
+  return div;
+}
+
+function crearPartidoJugado(partido) {
+  const div = document.createElement("div");
+  div.classList.add("partido");
+
+  const fecha = formatearFecha(partido.fecha);
+
+  div.innerHTML = `
+    <strong>${partido.equipoLocal} vs ${partido.equipoVisitante}</strong>
+    <div class="info">${partido.jornada || ""} - ${partido.competicion || ""}</div>
+    <div class="fecha">${fecha} - ${partido.lugar}</div>
+    <div class="resultado">Resultado: ${partido.resultado || "No disponible"}</div>
+  `;
+
+  return div;
+}
+
+function completarLista(contenedor, total, textoExtra) {
+  while (contenedor.children.length < total) {
+    const div = document.createElement("div");
+    div.classList.add("partido", "vacio");
+
+    if (textoExtra.includes("próxima temporada")) {
+      div.classList.add("fin-temporada");
+    }
+
+    div.innerHTML = `<em>${textoExtra}</em>`;
+    contenedor.appendChild(div);
+  }
+}
+
+
+function actualizarPartidosEnDirecto(partidos, contenedor) {
+  const ahora = new Date();
+  [...contenedor.children].forEach((div, i) => {
+    const partido = partidos[i];
+    if (!partido) return;
+    const yaMarcado = div.querySelector(".directo");
+
+    if (estaEnDirecto(partido, ahora)) {
+      if (!yaMarcado) {
+        const span = document.createElement("span");
+        span.textContent = "🔴 EN DIRECTO";
+        span.classList.add("directo");
+        div.insertBefore(span, div.lastElementChild);
+      }
+    } else {
+      if (yaMarcado) yaMarcado.remove();
+    }
+  });
+}
+
+function estaEnDirecto(partido, ahora = new Date()) {
+  const ini = new Date(partido.fecha);
+  const fin = new Date(partido.fin);
+  return ahora >= ini && ahora <= fin;
+}
+
+function formatearFecha(f) {
+  return new Date(f).toLocaleString("es-ES", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
 function crearICS(partido) {
   const inicio = new Date(partido.fecha);
-  const fin = new Date(partido.fin);
+  const fin = new Date(inicio.getTime() + 2 * 60 * 60 * 1000);
 
-  const contenido = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${partido.equipoLocal} vs ${partido.equipoVisitante}\nDTSTART:${formatoICS(inicio)}\nDTEND:${formatoICS(fin)}\nLOCATION:${partido.lugar}\nDESCRIPTION:Partido programado\nEND:VEVENT\nEND:VCALENDAR`;
+  const contenido = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${partido.equipoLocal} vs ${partido.equipoVisitante}\nDTSTART:${formatoICS(inicio)}\nDTEND:${formatoICS(fin)}\nLOCATION:${partido.lugar}\nDESCRIPTION:${partido.jornada || ""} - ${partido.competicion || ""}\nEND:VEVENT\nEND:VCALENDAR`;
 
   const blob = new Blob([contenido], { type: "text/calendar" });
   const link = document.createElement("a");
