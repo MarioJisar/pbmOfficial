@@ -4,29 +4,62 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("json/partidos.json")
     .then(res => res.json())
     .then(partidos => {
-      // Usa el <ul> ya existente en el HTML
-      const ul = document.getElementById("lista-partidos");
+      const listaProximos = document.getElementById("lista-partidos");
+      const listaJugados = document.getElementById("partidos-jugados");
+      const ahora = new Date();
+
+      const partidosFuturos = [];
+      const partidosPasados = [];
 
       partidos.forEach(partido => {
+        const inicio = new Date(partido.fecha);
+        const fin = new Date(partido.fin);
+
+        const enDirecto = ahora >= inicio && ahora <= fin;
+        const yaJugado = ahora > fin;
+
+        // Construcción visual
         const li = document.createElement("li");
-        li.innerHTML = `
+        let html = `
           <strong>${partido.equipoLocal} vs ${partido.equipoVisitante}</strong><br>
-          ${partido.fecha} - ${partido.lugar}<br>`;
+          ${inicio.toLocaleString()} - ${partido.lugar}<br>
+        `;
 
-        const btn = document.createElement("button");
-        btn.textContent = "Añadir al calendario";
-        btn.addEventListener("click", () => crearICS(partido));
-        li.appendChild(btn);
+        if (enDirecto) {
+          html += `<span style="color: red; font-weight: bold;">🔴 EN DIRECTO</span><br>`;
+        }
 
-        ul.appendChild(li);
+        if (yaJugado && partido.resultado) {
+          html += `<span style="font-weight: bold;">Resultado:</span> ${partido.resultado}<br>`;
+        }
+
+        li.innerHTML = html;
+
+        if (!yaJugado) {
+          const btn = document.createElement("button");
+          btn.textContent = "Añadir al calendario";
+          btn.addEventListener("click", () => crearICS(partido));
+          li.appendChild(btn);
+          partidosFuturos.push({ fecha: inicio, elemento: li });
+        } else {
+          partidosPasados.push({ fecha: inicio, elemento: li });
+        }
       });
+
+      // Ordenar
+      partidosFuturos.sort((a, b) => a.fecha - b.fecha); // ascendente
+      partidosPasados.sort((a, b) => b.fecha - a.fecha); // descendente
+
+      // Pintar
+      partidosFuturos.forEach(p => listaProximos.appendChild(p.elemento));
+      partidosPasados.forEach(p => listaJugados.appendChild(p.elemento));
     })
     .catch(err => console.error("Error cargando partidos:", err));
 });
 
 function crearICS(partido) {
   const inicio = new Date(partido.fecha);
-  const fin = new Date(inicio.getTime() + 2 * 60 * 60 * 1000); // duración de 2h
+  const fin = new Date(partido.fin);
 
   const contenido = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${partido.equipoLocal} vs ${partido.equipoVisitante}\nDTSTART:${formatoICS(inicio)}\nDTEND:${formatoICS(fin)}\nLOCATION:${partido.lugar}\nDESCRIPTION:Partido programado\nEND:VEVENT\nEND:VCALENDAR`;
 
