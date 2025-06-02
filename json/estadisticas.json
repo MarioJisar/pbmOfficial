@@ -19,5 +19,75 @@
     "goles": 7,
     "asistencias": 4,
     "mvps": 6
+  },
+  {
+    "nombre": "Javi",
+    "partidos_asistidos": 23,
+    "goles": 12,
+    "asistencias": 8,
+    "mvps": 5
+  },
+  {
+    "nombre": "Diego",
+    "partidos_asistidos": 23,
+    "goles": 9,
+    "asistencias": 11,
+    "mvps": 3
+  },
+  {
+    "nombre": "Mario 2",
+    "partidos_asistidos": 23,
+    "goles": 7,
+    "asistencias": 4,
+    "mvps": 6
+  },
+  {
+    "nombre": "Pablo",
+    "partidos_asistidos": 23,
+    "goles": 12,
+    "asistencias": 8,
+    "mvps": 5
+  },
+  {
+    "nombre": "Jeremy",
+    "partidos_asistidos": 23,
+    "goles": 9,
+    "asistencias": 11,
+    "mvps": 3
+  },
+  {
+    "nombre": "Mario",
+    "partidos_asistidos": 23,
+    "goles": 7,
+    "asistencias": 4,
+    "mvps": 6
+  },
+  {
+    "nombre": "Alejandro",
+    "partidos_asistidos": 23,
+    "goles": 12,
+    "asistencias": 8,
+    "mvps": 5
+  },
+  {
+    "nombre": "Random 1",
+    "partidos_asistidos": 23,
+    "goles": 9,
+    "asistencias": 11,
+    "mvps": 3
+  },
+  {
+    "nombre": "Random 2",
+    "partidos_asistidos": 23,
+    "goles": 7,
+    "asistencias": 4,
+    "mvps": 6
+  },
+  {
+    "nombre": "Random 3",
+    "partidos_asistidos": 23,
+    "goles": 7,
+    "asistencias": 4,
+    "mvps": 6
   }
 ]
