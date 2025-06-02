@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("json/partidos.json")
     .then(res => res.json())
     .then(partidos => {
-      const contenedor = document.getElementById("partidos");
-      const ul = document.createElement("ul");
+      // Usa el <ul> ya existente en el HTML
+      const ul = document.getElementById("lista-partidos");
 
       partidos.forEach(partido => {
         const li = document.createElement("li");
@@ -20,8 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         ul.appendChild(li);
       });
-
-      contenedor.appendChild(ul);
     })
     .catch(err => console.error("Error cargando partidos:", err));
 });
