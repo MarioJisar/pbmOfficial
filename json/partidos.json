@@ -1,32 +1,41 @@
 [
   {
     "equipoLocal": "PBM 2.0",
-    "equipoVisitante": "Pataditas FC",
-    "fecha": "2025-05-31T18:00:00",
-    "fin": "2025-05-31T19:00:00",
-    "lugar": "La Granadilla",
-    "resultado": "4 - 4"
-  },
-  {
-    "equipoLocal": "Zirdam",
-    "equipoVisitante": "PBM 2.0",
-    "fecha": "2025-06-02T20:00:00",
-    "fin": "2025-06-03T18:00:00",
-    "lugar": "La Granadilla"
+    "equipoVisitante": "GALACTICOS F.S",
+    "fecha": "2025-05-10T17:00:00",
+    "fin": "2025-05-10T18:00:00",
+    "lugar": "B.P. GALDOS",
+    "jornada": "Jornada 22",
+    "competicion": "Liga",
+    "resultado": "7 - 3"
   },
   {
     "equipoLocal": "PBM 2.0",
-    "equipoVisitante": "Pataditas FC",
-    "fecha": "2025-05-31T18:00:00",
-    "fin": "2025-05-31T19:00:00",
+    "equipoVisitante": "USINDOS FC",
+    "fecha": "2025-05-24T21:00:00",
+    "fin": "2025-05-24T22:00:00",
     "lugar": "La Granadilla",
-    "resultado":"4 - 4"
+    "jornada": "Jornada 24",
+    "competicion": "Liga",
+    "resultado": "2 - 7"
   },
   {
-    "equipoLocal": "Zirdam",
+    "equipoLocal": "PATADITAS FC",
     "equipoVisitante": "PBM 2.0",
-    "fecha": "2025-06-02T19:00:00",
-    "fin": "2025-06-02T20:00:00",
-    "lugar": "La Granadilla"
+    "fecha": "2025-06-02T18:00:00",
+    "fin": "2025-06-02T19:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 25",
+    "competicion": "Liga",
+    "resultado": "4 - 4"
+  },
+  {
+    "equipoLocal": "PBM 2.0",
+    "equipoVisitante": "TALES DE CUALES 2.0",
+    "fecha": "2025-06-07T17:00:00",
+    "fin": "2025-06-07T18:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 26",
+    "competicion": "Liga"
   }
 ]
