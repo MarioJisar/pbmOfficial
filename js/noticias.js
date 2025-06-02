@@ -14,9 +14,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if (ahora >= inicio && ahora <= fin) {
           const article = document.createElement("article");
           const titulo = document.createElement("h3");
-          const contenido = document.createElement("p");
 
-          titulo.textContent = noticia.titulo;
+          if (noticia.enlace) {
+            const enlace = document.createElement("a");
+            enlace.textContent = noticia.titulo;
+            enlace.href = noticia.enlace;
+
+            // Abrir en nueva pestaña si es enlace externo
+            if (/^https?:\/\//i.test(noticia.enlace)) {
+              enlace.target = "_blank";
+              enlace.rel = "noopener noreferrer";
+            }
+
+            titulo.appendChild(enlace);
+          } else {
+            titulo.textContent = noticia.titulo;
+          }
+
+          const contenido = document.createElement("p");
           contenido.textContent = noticia.contenido;
 
           article.appendChild(titulo);
