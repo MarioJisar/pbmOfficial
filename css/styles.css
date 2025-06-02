@@ -117,9 +117,7 @@ section {
 }
 
 /* NOTICIAS Y LISTAS */
-#noticias article,
-#proximos-partidos ul li,
-#ultimos-partidos ul li {
+#noticias article {
   background-color: #f7f9fc;
   border: 1px solid #e1e4ea;
   border-radius: 12px;
@@ -149,8 +147,10 @@ th {
   color: #2c3e50;
 }
 
-ul {
-    list-style-type: none;
+#estadisticas-jugadores {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 #estadisticas-jugadores table{
@@ -198,6 +198,86 @@ ul {
 	opacity: 1;
 }
 
+/* PARTIDOS */
+.partido {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 120px;
+  justify-content: space-between;
+}
+
+.partido .info,
+.partido .fecha,
+.partido .resultado {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.partido button {
+  margin-top: auto;
+  align-self: start;
+}
+
+.partido.vacio {
+  background: rgba(240, 240, 240, 0.6);
+  text-align: center;
+  font-style: italic;
+}
+
+.partido.vacio.fin-temporada {
+  font-size: 0.9em;
+  padding: 0.5em 1em;
+  line-height: 1.2;
+  background: transparent;
+  border: none;
+  height: auto;
+  min-height: unset;
+  text-align: center;
+  opacity: 0.75;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bloque-deportivo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.partidos, #estadisticas-jugadores {
+  flex: 1 1 45%;
+  min-width: 300px;
+}
+
+.directo {
+  color: red;
+  font-weight: bold;
+}
+
+#contenedor-tabla {
+  flex-grow: 1;
+  overflow-x: auto;
+}
+
+table#tabla-estadisticas {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table#tabla-estadisticas th,
+table#tabla-estadisticas td {
+  padding: 0.5em;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
 /* BOTONES */
 button {
   background-color: #4381c1;
@@ -212,6 +292,12 @@ button {
 
 button:hover {
   background-color: #365f91;
+}
+
+.directo {
+  color: red;
+  font-weight: bold;
+  margin-left: 10px;
 }
 
 /* GALERÍA, EQUIPACIONES, PLANTILLA Y PALMARÉS */
@@ -275,6 +361,7 @@ footer {
   .bloque-deportivo {
     display: flex;
     gap: 30px;
+    flex-direction: column;
   }
 
   .bloque-deportivo > section {
