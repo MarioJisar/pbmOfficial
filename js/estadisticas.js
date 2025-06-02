@@ -4,8 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("json/estadisticas.json")
     .then(res => res.json())
     .then(jugadores => {
-      const contenedor = document.getElementById("tabla-estadisticas");
+      const contenedor = document.getElementById("contenedor-tabla");
       const tabla = document.createElement("table");
+      tabla.id = "tabla-estadisticas";
 
       const thead = document.createElement("thead");
       thead.innerHTML = `
@@ -32,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       tabla.appendChild(tbody);
       contenedor.appendChild(tabla);
+      
+      new Tablesort(tabla);
     })
     .catch(err => console.error("Error cargando estadísticas:", err));
 });
