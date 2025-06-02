@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PBM 2.0</title>
   <link rel="stylesheet" href="css/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <script defer src="js/carousel.js"></script>
   <script defer src="js/noticias.js"></script>
   <script defer src="js/partidos.js"></script>
   <script defer src="js/clasificacion.js"></script>
   <script defer src="js/estadisticas.js"></script>
 </head>
+
 <body>
   <header>
-    <div class="carousel">
-      <img src="img/header1.jpg" alt="Imagen 1" class="active">
-      <img src="img/header2.jpg" alt="Imagen 2">
-      <img src="img/header3.jpg" alt="Imagen 3">
-    </div>
+    <section class="portada">
+      <div class="portada-contenido">
+        <img src="img/WhatsApp Image 2025-05-26 at 19.43.593.jpeg" alt="Escudo del club" class="escudo-portada">
+        <h1>PBM 2.0</h1>
+        <p class="lema">Eu farei 10x se for preciso. Eles não estão preparados.</p>
+      </div>
+    </section>    
   </header>
   <main>
     <section id="noticias">
@@ -30,15 +35,25 @@
       <table id="tabla-clasificacion"></table>
     </section>
 
-    <section id="partidos">
-      <h2>Próximos Partidos</h2>
-      <ul id="lista-partidos"></ul>
-    </section>
+    <div class="bloque-deportivo">
 
-    <section id="estadisticas-jugadores">
-      <h2>Estadísticas de Jugadores</h2>
-      <table id="tabla-estadisticas"></table>
-    </section>
+      <section id="partidos">
+        <h2>Próximos Partidos</h2>
+        <ul id="lista-partidos"></ul>
+        <div id="calendario">
+          <h3>Calendario</h3>
+          <p>
+            <a href="https://deportes.majadahonda.org/futbol-sala-populares" target="_blank" rel="noopener noreferrer">
+              Consultar
+            </a>
+          </p>
+        </div>
+      </section>
+      <section id="estadisticas-jugadores">
+        <h2>Estadísticas de Jugadores</h2>
+        <table id="tabla-estadisticas"></table>
+      </section>
+    </div>
 
     <section id="equipaciones">
       <h2>Equipaciones</h2>
@@ -89,7 +104,7 @@
           <img src="img/WhatsApp Image 2025-05-28 at 15.18.59.jpeg" alt="Jugador 1">
           <p>Equipucho</p>
         </div>
-        </div>
+      </div>
       </div>
     </section>
 
@@ -100,7 +115,8 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 PBM 2.0. Todos los derechos reservados.</p>
+    <p style="color: bisque;">&copy; 2025 PBM 2.0. Todos los derechos reservados.</p>
   </footer>
 </body>
+
 </html>
