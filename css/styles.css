@@ -194,10 +194,11 @@ button:hover {
   background-color: #365f91;
 }
 
-/* GALERÍA, EQUIPACIONES, PLANTILLA */
+/* GALERÍA, EQUIPACIONES, PLANTILLA Y PALMARÉS */
 #equipaciones .equipacion,
 #galeria .imagenes,
-#plantilla .jugadores {
+#plantilla .jugadores,
+#palmares .trofeos {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
@@ -206,7 +207,8 @@ button:hover {
 
 #galeria .imagen,
 #equipaciones .propuesta,
-#plantilla .jugador {
+#plantilla .jugador,
+#palmares .trofeo {
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -218,7 +220,8 @@ button:hover {
 
 #galeria .imagen:hover,
 #equipaciones .propuesta:hover,
-#plantilla .jugador:hover {
+#plantilla .jugador:hover, 
+#palmares .trofeo:hover{
   transform: translateY(-5px);
 }
 
