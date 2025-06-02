@@ -7,6 +7,10 @@
   --gris-fondo: #f4f4f4;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: 'Inter', 'Segoe UI', sans-serif;
