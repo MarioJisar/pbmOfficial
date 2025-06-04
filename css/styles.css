@@ -26,12 +26,16 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../img/a578cb51030333.58e045f7ca9d6.gif"); /* Reemplaza con tu gif */
+  background-image: url("../img/a578cb51030333.58e045f7ca9d6.gif");
+  /* Reemplaza con tu gif */
   background-size: cover;
   background-position: center;
-  opacity: 0.1; /* Ajusta para hacerlo más o menos tenue */
-  pointer-events: none; /* Para que no interfiera con los clics */
-  z-index: -1; /* Detrás de todo */
+  opacity: 0.1;
+  /* Ajusta para hacerlo más o menos tenue */
+  pointer-events: none;
+  /* Para que no interfiera con los clics */
+  z-index: -1;
+  /* Detrás de todo */
 }
 
 a {
@@ -50,7 +54,7 @@ a:hover {
   padding: 20px 15px;
   color: #2c2c2c;
   border-bottom: 4px solid white;
-  box-shadow: inset 0 -5px 20px rgba(0,0,0,0.03);
+  box-shadow: inset 0 -5px 20px rgba(0, 0, 0, 0.03);
 }
 
 .portada-contenido {
@@ -62,7 +66,7 @@ a:hover {
   max-width: 100px;
   height: auto;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0,0,0,0.06);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
   background-color: white;
   padding: 8px;
 }
@@ -83,7 +87,8 @@ a:hover {
 }
 
 /* TITULOS */
-h1, h2 {
+h1,
+h2 {
   font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -136,7 +141,8 @@ table {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-th, td {
+th,
+td {
   padding: 12px 15px;
   text-align: center;
   border-bottom: 1px solid #eee;
@@ -148,54 +154,55 @@ th {
 }
 
 #estadisticas-jugadores {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex: 1 1 0;
+  /* Crece y se adapta al resto del espacio */
+  min-width: 300px;
+  width: 100%;
 }
 
-#estadisticas-jugadores table{
+#estadisticas-jugadores table {
   margin-left: auto;
   margin-right: auto;
 }
 
 #estadisticas-jugadores th,
-#estadisticas-jugadores td{
+#estadisticas-jugadores td {
   padding: 0.8em;
 }
 
-#estadisticas-jugadores th[role=columnheader]:not(.no-sort){
-	cursor: pointer;
+#estadisticas-jugadores th[role=columnheader]:not(.no-sort) {
+  cursor: pointer;
 }
 
-#estadisticas-jugadores th[role=columnheader]:not(.no-sort):after{
-	content: '';
-	float: right;
-	margin-top: 7px;
+#estadisticas-jugadores th[role=columnheader]:not(.no-sort):after {
+  content: '';
+  float: right;
+  margin-top: 7px;
   margin-left: 5px;
-	border-width: 0 4px 4px;
-	border-style: solid;
-	border-color: white transparent;
-	visibility: hidden;
-	opacity: 0;
-	-ms-user-select: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
+  border-width: 0 4px 4px;
+  border-style: solid;
+  border-color: white transparent;
+  visibility: hidden;
+  opacity: 0;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
-#estadisticas-jugadores th[aria-sort=ascending]:not(.no-sort):after{
-	border-bottom: none;
-	border-width: 4px 4px 0;
+#estadisticas-jugadores th[aria-sort=ascending]:not(.no-sort):after {
+  border-bottom: none;
+  border-width: 4px 4px 0;
 }
 
-#estadisticas-jugadores th[aria-sort]:not(.no-sort):after{
-	visibility: visible;
-	opacity: 0.4;
+#estadisticas-jugadores th[aria-sort]:not(.no-sort):after {
+  visibility: visible;
+  opacity: 0.4;
 }
 
-#estadisticas-jugadores th[role=columnheader]:not(.no-sort):hover:after{
-	visibility: visible;
-	opacity: 1;
+#estadisticas-jugadores th[role=columnheader]:not(.no-sort):hover:after {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* PARTIDOS */
@@ -247,13 +254,22 @@ th {
 
 .bloque-deportivo {
   display: flex;
-  flex-wrap: wrap;
   gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
-.partidos, #estadisticas-jugadores {
-  flex: 1 1 45%;
-  min-width: 300px;
+.partidos,
+#estadisticas-jugadores {
+  width: 100%;
+  max-width: none;
+}
+
+.partidos {
+  flex: 0 1 320px;
+  /* No crece, pero se reduce hasta 320px */
+  max-width: 400px;
+  width: 100%;
 }
 
 .directo {
@@ -262,7 +278,7 @@ th {
 }
 
 #contenedor-tabla {
-  flex-grow: 1;
+  width: 100%;
   overflow-x: auto;
 }
 
@@ -317,7 +333,7 @@ button:hover {
 #palmares .trofeo {
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   padding: 10px;
   max-width: 300px;
   text-align: center;
@@ -326,12 +342,13 @@ button:hover {
 
 #galeria .imagen:hover,
 #equipaciones .propuesta:hover,
-#plantilla .jugador:hover, 
-#palmares .trofeo:hover{
+#plantilla .jugador:hover,
+#palmares .trofeo:hover {
   transform: translateY(-5px);
 }
 
 img {
+  background: white;
   max-width: 100%;
 }
 
@@ -347,6 +364,7 @@ footer {
 
 /* RESPONSIVE */
 @media (max-width: 600px) {
+
   #plantilla .jugador,
   #equipaciones .propuesta,
   #galeria .imagen {
@@ -358,10 +376,9 @@ footer {
   .bloque-deportivo {
     display: flex;
     gap: 30px;
-    flex-direction: column;
   }
 
-  .bloque-deportivo > section {
+  .bloque-deportivo>section {
     flex: 1;
   }
 }
@@ -377,5 +394,17 @@ footer {
 
   .portada .escudo-portada {
     max-width: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bloque-deportivo {
+    flex-direction: column;
+  }
+
+  .partidos,
+  #estadisticas-jugadores {
+    width: 100%;
+    max-width: none;
   }
 }
