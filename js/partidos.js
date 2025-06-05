@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const jugados = partidos
         .filter(p => new Date(p.fin) < ahora)
-        .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
+        .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
         .slice(0, 2);
 
       const proximos = partidos
@@ -93,6 +93,11 @@ function completarLista(contenedor, total, textoExtra) {
   }
 }
 
+function estaEnDirecto(partido, ahora = new Date()) {
+  const ini = new Date(partido.fecha);
+  const fin = new Date(partido.fin);
+  return ahora >= ini && ahora <= fin;
+}
 
 function actualizarPartidosEnDirecto(partidos, contenedor) {
   const ahora = new Date();
@@ -112,12 +117,6 @@ function actualizarPartidosEnDirecto(partidos, contenedor) {
       if (yaMarcado) yaMarcado.remove();
     }
   });
-}
-
-function estaEnDirecto(partido, ahora = new Date()) {
-  const ini = new Date(partido.fecha);
-  const fin = new Date(partido.fin);
-  return ahora >= ini && ahora <= fin;
 }
 
 function formatearFecha(f) {
