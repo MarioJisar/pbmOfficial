@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .slice(0, 2);
 
       const proximos = partidos
-        .filter(p => new Date(p.fecha) > ahora)
+        .filter(p => new Date(p.fin ) > ahora)
         .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
         .slice(0, 2);
 
@@ -46,7 +46,7 @@ function crearPartidoProximo(partido) {
   div.classList.add("partido");
 
   const fecha = formatearFecha(partido.fecha);
-  const directo = estaEnDirecto(partido) ? `<span class="directo">🔴 EN DIRECTO</span>` : "";
+  const directo = estaEnDirecto(partido) ? `<span class="directo"><img src="../img/live-streaming.gif" style="height: 2em; vertical-align: middle;"> EN DIRECTO <img src="../img/package.gif" style="height: 2em; vertical-align: middle;"></span>` : "";
 
   div.innerHTML = `
     <strong>${partido.equipoLocal} vs ${partido.equipoVisitante}</strong>
