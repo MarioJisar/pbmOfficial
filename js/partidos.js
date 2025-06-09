@@ -9,11 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const jugados = partidos
         .filter(p => new Date(p.fin) < ahora)
-        .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
+        .sort((a, b) => new Date(b.fecha) - new Date(a.fecha)) // del más nuevo al más viejo
         .slice(0, 2);
 
       const proximos = partidos
-        .filter(p => new Date(p.fin ) > ahora)
+        .filter(p => new Date(p.fin) > ahora)
         .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
         .slice(0, 2);
 

@@ -23,5 +23,17 @@
     "inicio": "2025-06-01T00:00:00",
     "fin": "2025-12-31T23:59:59",
     "enlace": "#palmares"
+  },
+  {
+    "titulo": "Hoy nuestro equipo juega el último partido!!",
+    "contenido": "Los nuestros disputarán su último partido de Liga con garra, corazón y pasión.",
+    "inicio": "2025-06-06T00:00:00",
+    "fin": "2025-07-06T23:59:59"
+  },
+  {
+    "titulo": "Victoria aplastante para cerrar la temporada!!",
+    "contenido": "Hat-trick de Marcos, golazo de falta de Víctor, y doblete de Mario forzaron al rival a tirar ff.",
+    "inicio": "2025-06-07T00:00:00",
+    "fin": "2025-07-07T23:59:59"
   }
 ]
