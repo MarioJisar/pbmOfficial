@@ -127,13 +127,62 @@
 
     <section id="historia">
       <h2>Historia del Club</h2>
-      <p>Fundado en 2015, el Club de Fútbol ha sido un emblema de la ciudad por más de 10 añazos.</p>
+      <p>Fundado en 2015, PBM 2.0 ha sido un emblema de la ciudad por más de 10 añazos.</p>
     </section>
   </main>
+  <section id="zona-usuario" style="text-align: center; margin-top: 3rem;">
+    <button id="btn-login" onclick="window.location.href='login.html'">Iniciar sesión / Registrarse</button>
+    <button id="btn-fantasy" onclick="window.location.href='fantasy.html'" style="display:none;">Fantasy
+      Football</button>
+    <button id="btn-logout" style="display:none;">Cerrar sesión</button>
+  </section>
+  <script>
+    // Mostrar u ocultar botones según el estado de sesión
+    const isLoggedIn = false; // Cambia esto según el estado de sesión real
 
+    document.getElementById('btn-login').style.display = isLoggedIn ? 'none' : 'block';
+    document.getElementById('btn-fantasy').style.display = isLoggedIn ? 'block' : 'none';
+    document.getElementById('btn-logout').style.display = isLoggedIn ? 'block' : 'none';
+
+    // Función para cerrar sesión
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      // Aquí iría la lógica para cerrar sesión
+      alert('Sesión cerrada');
+      window.location.reload(); // Recargar la página para actualizar el estado
+    });
+  </script>
+  </section>
   <footer>
     <p style="color: bisque;">&copy; 2025 PBM 2.0. Todos los derechos reservados.</p>
   </footer>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyAiIS2JlPaQUwgK6bNaOY0VKbS9VbDIAoU",
+      authDomain: "pbmfantasy.firebaseapp.com",
+      projectId: "pbmfantasy",
+      storageBucket: "pbmfantasy.firebasestorage.app",
+      messagingSenderId: "910429089407",
+      appId: "1:910429089407:web:5d24455c4799a13b86d94a",
+      measurementId: "G-KDSLC82SB5"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = firebase.firestore();
+  </script>
+
 </body>
 
 </html>

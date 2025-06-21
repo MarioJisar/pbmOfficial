@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy [Nombre de tu equipo]</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Asegúrate que esta ruta es correcta -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/WhatsApp Image 2025-05-26 at 19.43.593.jpeg" alt="icono">
+    <!-- Otros enlaces a scripts o estilos si son necesarios para el fantasy -->
+    <script defer src="js/fantasy.js"></script>
+    <!-- Asegúrate de que este archivo existe y contiene la lógica del fantasy -->
+</head>
+
+<body>
+    <header>
+        <section class="portada">
+            <div class="portada-contenido">
+                <img src="img/WhatsApp Image 2025-05-26 at 19.43.593.jpeg" alt="Escudo del club" class="escudo-portada">
+                <h1>Fantasy [Nombre de tu equipo]</h1>
+                <p class="lema">Eu farei 10x se for preciso. Eles não estão preparados.</p>
+            </div>
+        </section>
+        <!-- Puedes añadir una barra de navegación aquí si lo deseas -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="login_register.html">Login/Registro</a></li>
+                <li><a href="fantasy.html">Mi Equipo</a></li>
+                <li><a href="#mercado">Mercado</a></li>
+                <li><a href="#puntuaciones">Puntuaciones</a></li>
+                <li><a href="#actualizaciones">Actualizaciones</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="mi-equipo">
+            <h2>Mi Equipo</h2>
+            <button id="btn-editar-plantilla">Editar Plantilla</button> <!-- Botón de edición -->
+            <div id="plantilla">
+                <!-- Los jugadores y espacios vacíos se cargarán aquí con JavaScript -->
+                <!-- Ejemplo de estructura de jugador/espacio vacío: -->
+                <!-- <div class="jugador-fantasy">...</div> -->
+                <!-- <div class="celda-vacia">...</div> -->
+            </div>
+        </section>
+
+        <section id="mercado">
+            <h2>Mercado de Fichajes</h2>
+            <div id="jugadores-mercado">
+                <!-- Aquí se mostrarán los jugadores disponibles en el mercado -->
+                <!-- Ejemplo de estructura de jugador en mercado (puede ser similar a .jugador-fantasy pero con diferente info): -->
+                <!-- <div class="jugador-mercado">...</div> -->
+            </div>
+        </section>
+
+        <section id="puntuaciones">
+            <h2>Tabla de Puntuaciones</h2>
+            <table id="tabla-puntuaciones">
+                <thead>
+                    <tr>
+                        <th>Posición</th>
+                        <th>Jugador</th>
+                        <th>Puntos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las puntuaciones se cargarán aquí con JavaScript -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="actualizaciones">
+            <h2>Últimas Actualizaciones</h2>
+            <ul id="lista-actualizaciones">
+                <!-- Las actualizaciones se cargarán aquí con JavaScript -->
+            </ul>
+        </section>
+
+        <!-- Puedes añadir otras secciones relacionadas con el fantasy si lo necesitas -->
+
+    </main>
+
+    <!-- Puedes incluir la sección zona-usuario si es relevante para el fantasy -->
+    <section id="zona-usuario" style="text-align: center; margin-top: 3rem;">
+        <button id="btn-login" onclick="window.location.href='login.html'">Iniciar sesión / Registrarse</button>
+        <button id="btn-fantasy" onclick="window.location.href='fantasy.html'" style="display:none;">Fantasy
+            Football</button>
+        <button id="btn-logout" style="display:none;">Cerrar sesión</button>
+    </section>
+    <script>
+        // Mostrar u ocultar botones según el estado de sesión (mantén esta lógica si la necesitas)
+        const isLoggedIn = false; // Cambia esto según el estado de sesión real
+
+        document.getElementById('btn-login').style.display = isLoggedIn ? 'none' : 'block';
+        document.getElementById('btn-fantasy').style.display = isLoggedIn ? 'block' : 'none';
+        document.getElementById('btn-logout').style.display = isLoggedIn ? 'block' : 'none';
+
+        // Función para cerrar sesión
+        document.getElementById('btn-logout').addEventListener('click', () => {
+            // Aquí iría la lógica para cerrar sesión
+            alert('Sesión cerrada');
+            window.location.reload(); // Recargar la página para actualizar el estado
+        });
+    </script>
+
+
+    <footer>
+        <p style="color: bisque;">&copy; 2025 Fantasy [Nombre de tu equipo]. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
+    <!-- Firebase Authentication (si planeas usar la autenticación de Firebase) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+    <!-- Firebase Cloud Firestore (para la base de datos) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+      // Tu configuración de Firebase Project aquí
+      const firebaseConfig = {
+        apiKey: "YOUR_API_KEY", // Reemplaza con tu API Key
+        authDomain: "YOUR_AUTH_DOMAIN", // Reemplaza con tu Auth Domain
+        projectId: "YOUR_PROJECT_ID", // Reemplaza con tu Project ID
+        storageBucket: "YOUR_STORAGE_BUCKET", // Reemplaza con tu Storage Bucket
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // Reemplaza con tu Messaging Sender ID
+        appId: "YOUR_APP_ID" // Reemplaza con tu App ID
+      };
+
+      // Inicializa Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // Obtén una referencia a Firestore (la usaremos en js/script.js)
+      const db = firebase.firestore();
+    </script>
+
+    <script src="js/script.js"></script> <!-- Enlace a tu archivo JavaScript -->
+</body>
+
+</html>

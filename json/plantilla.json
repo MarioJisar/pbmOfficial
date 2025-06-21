@@ -1,0 +1,33 @@
+[
+    {
+        "id": 1,
+        "nombre": "Jugador A",
+        "posicion": "Portero",
+        "imagen": "img/jugador_generico.jpeg"
+    },
+    {
+        "id": 2,
+        "nombre": "Jugador B",
+        "posicion": "Defensa",
+        "imagen": "img/jugador_generico.jpeg"
+    },
+    {
+        "id": 3,
+        "nombre": "Jugador C",
+        "posicion": "Centrocampista",
+        "imagen": "img/jugador_generico.jpeg"
+    },
+    {
+        "id": 4,
+        "nombre": "Jugador D",
+        "posicion": "Delantero",
+        "imagen": "img/jugador_generico.jpeg"
+    },
+    {
+        "id": 5,
+        "nombre": "Jugador E",
+        "posicion": "Delantero",
+        "imagen": "img/jugador_generico.jpeg"
+    }
+]
+
