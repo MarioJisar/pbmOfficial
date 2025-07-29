@@ -109,4 +109,3 @@ function calcularCoste(puntos) {
   // Coste en millones, mínimo 1M
   return Math.max(1, Math.round(puntos / 3));
 }
-

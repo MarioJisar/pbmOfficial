@@ -19,7 +19,8 @@ body {
   line-height: 1.6;
 }
 
-body, html {
+body,
+html {
   overflow-x: hidden;
 }
 
@@ -308,7 +309,8 @@ table#tabla-estadisticas td {
 }
 
 .tabla-scroll table {
-  min-width: 600px; /* Puedes ajustar este valor */
+  min-width: 600px;
+  /* Puedes ajustar este valor */
   border-collapse: collapse;
 }
 
@@ -369,6 +371,219 @@ img {
   background: white;
   max-width: 100%;
 }
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.jugador {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 0.5rem;
+  width: 150px;
+  text-align: center;
+}
+
+/* Mi Equipo y Mercado */
+#mi-equipo #plantilla,
+#mercado #jugadores-mercado {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  /* Espacio entre jugadores */
+  justify-content: center;
+  /* Centrar jugadores */
+}
+
+/* Estilo para cada jugador (Tarjeta) */
+.jugador-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  /* Ancho fijo para las tarjetas de jugador */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: grab;
+  /* Indica que se pueden mover */
+  transition: transform 0.2s ease-in-out;
+  /* Transición suave al arrastrar */
+}
+
+.jugador-card img {
+  max-width: 80px;
+  /* Tamaño de la imagen del jugador */
+  height: auto;
+  border-radius: 50%;
+  /* Imagen redonda */
+  margin-bottom: 10px;
+  background-color: #eee;
+  /* Fondo gris claro para imágenes */
+}
+
+.jugador-card h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+  color: var(--azul-oscuro);
+}
+
+.jugador-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Estilo para la tabla de Puntuaciones */
+#puntuaciones table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+#puntuaciones th,
+#puntuaciones td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+#puntuaciones th {
+  background-color: #e0ecff;
+  color: var(--azul-oscuro);
+  /* Aplicar color de variable */
+}
+
+#puntuaciones tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+  /* Color de fondo para filas pares */
+}
+
+/* Estilo para la lista de Actualizaciones */
+#actualizaciones ul {
+  list-style: none;
+  padding: 0;
+}
+
+#actualizaciones li {
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  font-size: 0.95rem;
+}
+
+#actualizaciones li strong {
+  color: var(--azul-oscuro);
+}
+
+/* ... (Mantener los estilos generales, de secciones, .jugador-fantasy, .celda-vacia anteriores) ... */
+/* Estilo para el modo de edición */
+#mi-equipo #plantilla.modo-edicion {
+    background-color: #fff3cd; /* Fondo naranja claro en modo edición */
+    border-color: #ffc107; /* Borde naranja */
+}
+
+/* Estilo para el cursor en modo edición */
+#mi-equipo #plantilla.modo-edicion .jugador-fantasy,
+#mi-equipo #plantilla.modo-edicion .celda-vacia {
+    cursor: pointer; /* Cambiar cursor a pointer en modo edición */
+}
+
+/* Estilo visual para el elemento seleccionado en modo edición */
+.jugador-fantasy.seleccionado,
+.celda-vacia.seleccionado {
+    border: 2px solid var(--amarillo); /* Borde amarillo para indicar selección */
+    box-shadow: 0 0 8px var(--amarillo); /* Sombra amarilla */
+}
+
+/* Estilos específicos para la sección de Mi Equipo */
+#mi-equipo #plantilla {
+  display: grid;
+  /* Usar grid para posicionar los jugadores en una alineación */
+  grid-template-columns: repeat(2, 1fr);
+  /* Dos columnas para los 2-2 */
+  grid-template-rows: auto auto auto;
+  /* Tres filas para 1-2-2 */
+  gap: 15px;
+  /* Espacio entre celdas del grid */
+  justify-items: center;
+  /* Centrar elementos en las celdas */
+  align-items: center;
+  /* Centrar elementos verticalmente */
+  min-height: 400px;
+  /* Aumentar altura mínima para la disposición */
+  padding: 20px;
+  background-color: #eaf2f8;
+  border-radius: 12px;
+  border: 2px dashed #a6c1ee;
+  max-width: 300px;
+  /* Limitar el ancho para que parezca una alineación */
+  margin: 20px auto;
+  /* Centrar el grid */
+}
+
+/* Posicionamiento específico para simular 1-2-2 */
+/* Celda para el portero (primera fila, abarcando dos columnas) */
+#mi-equipo #plantilla>*:nth-child(1) {
+  grid-column: 1 / span 2;
+  /* Abarca las dos columnas */
+  grid-row: 1;
+}
+
+/* Celdas para la defensa (segunda fila) */
+#mi-equipo #plantilla>*:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#mi-equipo #plantilla>*:nth-child(3) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/* Celdas para el ataque (tercera fila) */
+#mi-equipo #plantilla>*:nth-child(4) {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+#mi-equipo #plantilla>*:nth-child(5) {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+
+/* Ajustes responsive para la alineación */
+@media (max-width: 400px) {
+  #mi-equipo #plantilla {
+    grid-template-columns: 1fr;
+    /* Una sola columna en pantallas muy pequeñas */
+    grid-template-rows: repeat(5, auto);
+    /* Cinco filas para los 5 jugadores */
+    max-width: 150px;
+    /* Reducir ancho máximo */
+  }
+
+  /* Resetear posicionamiento específico en pantallas pequeñas */
+  #mi-equipo #plantilla>* {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+}
+
+
+/* ... (Mantener el resto de los estilos, incluyendo Mercado, Puntuaciones, etc.) ... */
+
 
 
 /* FOOTER */
