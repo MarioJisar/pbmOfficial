@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PBM Fantasy</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>PBM Fantasy</h1>
+    <button id="logout-btn" style="float:right;">Cerrar sesión</button>
+  </header>
+  <main>
+    <section id="bienvenida" style="display:none;">
+      <h2>¡Bienvenido, <span id="nombre-usuario"></span>!</h2>
+      <p>Crea tu plantilla fantasy solo con jugadores del PBM.</p>
+    </section>
+    <section id="login-requerido" style="display:none;">
+      <p>Debes iniciar sesión para jugar al Fantasy. <a href="login.html">Inicia sesión aquí</a></p>
+    </section>
+    <section id="fantasy-section" style="display:none;">
+      <h2>Tu plantilla</h2>
+      <form id="plantilla-form">
+        <div id="jugadores-lista"></div>
+        <button type="submit">Guardar plantilla</button>
+      </form>
+      <p id="fantasy-mensaje"></p>
+      <h3>Tu plantilla guardada:</h3>
+      <ul id="plantilla-guardada"></ul>
+    </section>
+  </main>
+  <script defer src="js/fantasy.js"></script>
+</body>
+</html>
