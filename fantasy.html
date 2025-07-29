@@ -22,13 +22,104 @@
     </section>
     <section id="fantasy-section" style="display:none;">
       <h2>Tu plantilla</h2>
+      <div id="presupuesto-section" style="margin-bottom:1em;">
+        <b>Presupuesto disponible:</b> <span id="presupuesto-usuario">0</span>M
+      </div>
       <form id="plantilla-form">
-        <div id="jugadores-lista"></div>
-        <button type="submit">Guardar plantilla</button>
+        <div id="jugadores-lista" class="cartas-jugadores"></div>
+        <button type="submit">Seleccionar jugadores</button>
       </form>
+      <div id="alineacion-section" style="display:none; margin-top:2em;">
+        <h3>Coloca tu plantilla en el campo</h3>
+        <div id="campo-futbol" style="display:flex; flex-direction:column; align-items:center; gap:1em; margin-bottom:1em;">
+          <div>
+            <span>Portero:</span>
+            <select id="pos-portero"><option value="">--Selecciona--</option></select>
+          </div>
+          <div style="display:flex; gap:1em;">
+            <div>
+              <span>Defensa 1:</span>
+              <select class="pos-campo" id="pos-campo-1"><option value="">--Selecciona--</option></select>
+            </div>
+            <div>
+              <span>Defensa 2:</span>
+              <select class="pos-campo" id="pos-campo-2"><option value="">--Selecciona--</option></select>
+            </div>
+            <div>
+              <span>Atacante 1:</span>
+              <select class="pos-campo" id="pos-campo-3"><option value="">--Selecciona--</option></select>
+            </div>
+            <div>
+              <span>Atacante 2:</span>
+              <select class="pos-campo" id="pos-campo-4"><option value="">--Selecciona--</option></select>
+            </div>
+          </div>
+        </div>
+        <button id="guardar-alineacion" type="button">Guardar alineación</button>
+        <p id="alineacion-mensaje"></p>
+      </div>
+
+      <section id="mercado-section" style="margin-top:2em;">
+        <h2>Mercado de Jugadores</h2>
+        <div id="notificaciones-mercado" style="background:#ffe9b3; padding:0.5em; margin-bottom:1em;"></div>
+        <div id="mercado-lista" class="cartas-jugadores"></div>
+        <h3>Movimientos recientes</h3>
+        <ul id="movimientos-mercado"></ul>
+      </section>
+
       <p id="fantasy-mensaje"></p>
       <h3>Tu plantilla guardada:</h3>
+      <div id="plantilla-cartas" class="cartas-jugadores"></div>
       <ul id="plantilla-guardada"></ul>
+  <style>
+    .cartas-jugadores {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+      margin-bottom: 1em;
+    }
+    .carta-jugador {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #0002;
+      padding: 1em;
+      width: 180px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .carta-jugador img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.5em;
+      background: #eee;
+    }
+    .carta-jugador .nombre {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 0.2em;
+    }
+    .carta-jugador .puntos {
+      color: #1a7f37;
+      font-weight: bold;
+      margin-bottom: 0.2em;
+    }
+    .carta-jugador .coste {
+      color: #b8860b;
+      margin-bottom: 0.2em;
+    }
+    .carta-jugador .stats {
+      font-size: 0.95em;
+      margin-bottom: 0.2em;
+    }
+    .carta-jugador .acciones {
+      margin-top: 0.5em;
+    }
+  </style>
     </section>
   </main>
   <script defer src="js/fantasy.js"></script>
