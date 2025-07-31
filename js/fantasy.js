@@ -20,7 +20,7 @@ const auth = getAuth(app);
 // --- FIRESTORE HELPERS ---
 const JORNADA_MAX = 5;
 const MERCADO_SIZE = 20;
-//const MERCADO_REFRESH_MS = 1 * 60 * 1000; // 1 minuto
+const MERCADO_REFRESH_MS = 1 * 60 * 1000; // 1 minuto
 
 // Guardar jornada actual
 async function guardarJornadaFirestore(jornada) {
@@ -321,6 +321,12 @@ function inicializarMercado(user, plantillaUsuario, mercado, presupuesto) {
       return;
     }
     const nuevoMercado = generarMercadoAleatorio();
+    // Limpiar slots comprados del mercado anterior
+    for (let i = 0; i < MERCADO_SIZE; i++) {
+      if (nuevoMercado[`comprado_${i}`]) {
+        delete nuevoMercado[`comprado_${i}`];
+      }
+    }
     await guardarMercadoFirestore(nuevoMercado);
     await guardarJornadaFirestore(j + 1);
     alert('¡Nuevo mercado disponible! Jornada ' + (j + 1));
