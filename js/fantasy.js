@@ -1,5 +1,5 @@
 // --- FIREBASE/FIRESTORE INTEGRACIÓN BASE ---
-import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove, onSnapshot } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
@@ -20,7 +20,7 @@ const auth = getAuth(app);
 // --- FIRESTORE HELPERS ---
 const JORNADA_MAX = 5;
 const MERCADO_SIZE = 20;
-const MERCADO_REFRESH_MS = 5 * 60 * 1000; // 5 minutos
+const MERCADO_REFRESH_MS = 1 * 60 * 1000; // 1 minuto
 
 // Guardar jornada actual
 async function guardarJornadaFirestore(jornada) {
@@ -57,7 +57,8 @@ async function obtenerPlantillaFirestore(uid) {
 
 // Mercado
 async function guardarMercadoFirestore(mercado) {
-  await setDoc(doc(db, "mercado", "global"), { mercado }, { merge: true });
+  // Sobrescribe el mercado completamente, eliminando cualquier campo residual
+  await setDoc(doc(db, "mercado", "global"), { mercado }, { merge: false });
 }
 async function obtenerMercadoFirestore() {
   const docSnap = await getDoc(doc(db, "mercado", "global"));
@@ -234,16 +235,16 @@ function inicializarMercado(user, plantillaUsuario, mercado, presupuesto) {
     presupuestoSpan.textContent = mostrar + 'M';
   }
 
-  // Mostrar jugadores del mercado actual (máx 20, puede haber repetidos)
+  // Actualización en tiempo real del mercado
+  let mercadoActual = mercado;
   function renderMercado() {
     mercadoLista.innerHTML = '';
     mercadoLista.style.display = 'grid';
     mercadoLista.style.gridTemplateColumns = 'repeat(auto-fit, minmax(220px, 1fr))';
     mercadoLista.style.gap = '1em';
-    const devueltos = mercado._devueltos || {};
-    // Mostrar solo los 20 slots del mercado
+    const devueltos = mercadoActual._devueltos || {};
     for (let i = 0; i < MERCADO_SIZE; i++) {
-      const j = mercado[`mercado_${i}`];
+      const j = mercadoActual[`mercado_${i}`];
       if (!j) continue;
       const stats = estadisticasPBM.find(s => s.nombre === j);
       const puntos = calcularPuntos(stats);
@@ -252,8 +253,7 @@ function inicializarMercado(user, plantillaUsuario, mercado, presupuesto) {
       if (esDevuelto) {
         coste = Math.max(1, Math.round(coste * 0.8));
       }
-      // Revisar si el slot ya fue comprado (marcarlo en el objeto mercado)
-      const slotComprado = mercado[`comprado_${i}`];
+      const slotComprado = mercadoActual[`comprado_${i}`];
       const carta = document.createElement('div');
       carta.className = 'carta-jugador';
       carta.style.display = 'flex';
@@ -309,6 +309,14 @@ function inicializarMercado(user, plantillaUsuario, mercado, presupuesto) {
       mercadoLista.appendChild(carta);
     }
   }
+
+  // Listener Firestore para mercado en tiempo real
+  onSnapshot(doc(db, "mercado", "global"), (docSnap) => {
+    if (docSnap.exists()) {
+      mercadoActual = docSnap.data().mercado || {};
+      renderMercado();
+    }
+  });
   // --- Mercado rotativo: cada 3 minutos ---
   let jornada = 1;
   let actualizando = false;
@@ -320,10 +328,11 @@ function inicializarMercado(user, plantillaUsuario, mercado, presupuesto) {
       actualizando = false;
       return;
     }
+    // Generar nuevo mercado SIN ningún slot bloqueado
     const nuevoMercado = generarMercadoAleatorio();
-    // Limpiar slots comprados del mercado anterior
+    // Asegurarse de que no haya ningún comprado_X en el nuevo mercado
     for (let i = 0; i < MERCADO_SIZE; i++) {
-      if (nuevoMercado[`comprado_${i}`]) {
+      if (nuevoMercado.hasOwnProperty(`comprado_${i}`)) {
         delete nuevoMercado[`comprado_${i}`];
       }
     }
@@ -353,9 +362,12 @@ function inicializarMercado(user, plantillaUsuario, mercado, presupuesto) {
     if (gratis && plantillaUsuario.length > 0) return;
     // Si es compra de slot de mercado
     if (typeof slotIdx === 'number') {
-      // Si ya está comprado ese slot, no permitir
-      if (mercado[`comprado_${slotIdx}`]) {
+      // Comprobación en tiempo real en Firestore antes de comprar
+      const mercadoDoc = await getDoc(doc(db, "mercado", "global"));
+      const mercadoActual = mercadoDoc.exists() ? mercadoDoc.data().mercado || {} : {};
+      if (mercadoActual[`comprado_${slotIdx}`]) {
         alert('Este jugador ya ha sido comprado por otro usuario.');
+        renderMercado(); // Actualiza la vista
         return;
       }
       mercado[`comprado_${slotIdx}`] = { usuario: user.email };
@@ -366,7 +378,7 @@ function inicializarMercado(user, plantillaUsuario, mercado, presupuesto) {
     await guardarMercadoFirestore(mercado);
     await guardarPresupuestoFirestore(user.uid, presupuesto);
     await agregarMovimientoFirestore({ fecha: new Date().toLocaleString(), usuario: user.email, tipo: 'compra', jugador, coste });
-    await agregarNotificacionFirestore(`${user.email} compró a ${jugador} (${coste}M)`);
+    await agregarNotificacionFirestore(`${user.displayName} compró a ${jugador} (${coste}M)`);
     renderMisJugadores(plantillaUsuario);
     renderMercado();
     renderPresupuesto();
