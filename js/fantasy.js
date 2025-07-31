@@ -20,7 +20,7 @@ const auth = getAuth(app);
 // --- FIRESTORE HELPERS ---
 const JORNADA_MAX = 5;
 const MERCADO_SIZE = 20;
-const MERCADO_REFRESH_MS = 1 * 60 * 1000; // 1 minuto
+const MERCADO_REFRESH_MS = 5 * 60 * 1000; // 5 minutos
 
 // Guardar jornada actual
 async function guardarJornadaFirestore(jornada) {
