@@ -8,11 +8,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Eliminado bloque de registro y duplicado de Firebase. Toda la lógica la gestiona js/fantasy.js -->
+
   <header>
     <h1>PBM Fantasy</h1>
     <button id="logout-btn" style="float:right;">Cerrar sesión</button>
+    <button id="eliminar-usuario-btn" style="float:right; margin-right:1em; background:#b71c1c; color:white;">Eliminar usuario</button>
+    <button id="ir-index-btn" style="float:left; margin-right:1em; background:#1976d2; color:white;">Inicio</button>
   </header>
   <main>
+    <div id="confirmacion-eliminar" style="display:none; background:#ffe9b3; padding:1em; border:2px solid #b71c1c; margin:1em 0; text-align:center;">
+      <p>¿Seguro que quieres eliminar tu usuario y todos tus datos? Esta acción es irreversible.</p>
+      <button id="confirmar-eliminar-btn" style="background:#b71c1c; color:white;">Sí, eliminar</button>
+      <button id="cancelar-eliminar-btn">Cancelar</button>
+    </div>
     <section id="bienvenida" style="display:none;">
       <h2>¡Bienvenido, <span id="nombre-usuario"></span>!</h2>
       <p>Crea tu plantilla fantasy solo con jugadores del PBM.</p>
@@ -23,11 +32,11 @@
     <section id="fantasy-section" style="display:none;">
       <h2>Tu plantilla</h2>
       <div id="presupuesto-section" style="margin-bottom:1em;">
-        <b>Presupuesto disponible:</b> <span id="presupuesto-usuario">0</span>M
+        <b>Presupuesto disponible:</b> <span id="presupuesto-usuario">0</span>
       </div>
       <form id="plantilla-form">
         <div id="jugadores-lista" class="cartas-jugadores"></div>
-        <button type="submit">Seleccionar jugadores</button>
+        <button type="submit">Actualizar jugadores</button>
       </form>
       <div id="alineacion-section" style="display:none; margin-top:2em;">
         <h3>Coloca tu plantilla en el campo</h3>
@@ -122,5 +131,89 @@
   </style>
     </section>
   </main>
-  <script defer src="js/fantasy.js"></script>
+  <script type="module" src="js/fantasy.js"></script>
+  <script type="module">
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    // Firebase ya está inicializado en el script de abajo
+    const auth = getAuth();
+
+    // Comprobar si el usuario está logueado
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Usuario logueado
+        document.getElementById('bienvenida').style.display = '';
+        document.getElementById('fantasy-section').style.display = '';
+        document.getElementById('login-requerido').style.display = 'none';
+        document.getElementById('nombre-usuario').textContent = user.displayName || user.email;
+      } else {
+        // No logueado
+        document.getElementById('bienvenida').style.display = 'none';
+        document.getElementById('fantasy-section').style.display = 'none';
+        document.getElementById('login-requerido').style.display = '';
+      }
+    });
+
+    // Logout con Firebase
+    document.getElementById('logout-btn').onclick = async () => {
+      await signOut(auth);
+      window.location.href = 'login.html';
+    };
+
+    // Ir al index
+    document.getElementById('ir-index-btn').onclick = () => {
+      window.location.href = 'index.html';
+    };
+
+    // Eliminar usuario con doble confirmación
+    const eliminarBtn = document.getElementById('eliminar-usuario-btn');
+    const confirmacionDiv = document.getElementById('confirmacion-eliminar');
+    const confirmarEliminarBtn = document.getElementById('confirmar-eliminar-btn');
+    const cancelarEliminarBtn = document.getElementById('cancelar-eliminar-btn');
+
+    eliminarBtn.onclick = () => {
+      confirmacionDiv.style.display = 'block';
+    };
+    cancelarEliminarBtn.onclick = () => {
+      confirmacionDiv.style.display = 'none';
+    };
+    confirmarEliminarBtn.onclick = async () => {
+      try {
+        // Eliminar datos del usuario en Firestore antes de eliminar la cuenta
+        const { getFirestore, doc, getDoc, setDoc, deleteDoc } = await import('https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js');
+        const db = getFirestore();
+        const user = auth.currentUser;
+        if (user) {
+          // Recuperar plantilla antes de eliminar
+          const userDoc = await getDoc(doc(db, 'usuarios', user.uid));
+          let plantilla = [];
+          if (userDoc.exists()) {
+            plantilla = userDoc.data().plantilla || [];
+          }
+          // Recuperar mercado
+          const mercadoDoc = await getDoc(doc(db, 'mercado', 'global'));
+          let mercado = {};
+          if (mercadoDoc.exists()) {
+            mercado = mercadoDoc.data().mercado || {};
+          }
+          // Devolver jugadores al mercado con valor al 80% y etiqueta
+          plantilla.forEach(jugador => {
+            mercado[jugador] = null;
+            // Guardar info de "devuelto80" en notificaciones del mercado
+            // Se marca en Firestore para que fantasy.js lo muestre
+            if (!mercado._devueltos) mercado._devueltos = {};
+            mercado._devueltos[jugador] = true;
+          });
+          await setDoc(doc(db, 'mercado', 'global'), { mercado }, { merge: true });
+          // Eliminar documento de usuario
+          await deleteDoc(doc(db, 'usuarios', user.uid));
+        }
+        await auth.currentUser.delete();
+        window.location.href = 'login.html';
+      } catch (e) {
+        alert('Debes volver a iniciar sesión para eliminar tu usuario por seguridad.');
+        await signOut(auth);
+        window.location.href = 'login.html';
+      }
+    };
+  </script>
 </body>
