@@ -542,6 +542,24 @@ function inicializarMercado(user, plantillaUsuario, mercado, presupuesto) {
 function mostrarAlineacionSection(jugadores) {
   const alineacionSection = document.getElementById('alineacion-section');
   alineacionSection.style.display = 'block';
+    // Botón limpiar plantilla
+    let limpiarBtn = document.getElementById('limpiar-alineacion');
+    if (!limpiarBtn) {
+      limpiarBtn = document.createElement('button');
+      limpiarBtn.id = 'limpiar-alineacion';
+      limpiarBtn.type = 'button';
+      limpiarBtn.textContent = 'Limpiar plantilla';
+      limpiarBtn.style.marginLeft = '1em';
+      const guardarBtn = document.getElementById('guardar-alineacion');
+      guardarBtn.parentNode.insertBefore(limpiarBtn, guardarBtn.nextSibling);
+    }
+    limpiarBtn.onclick = function() {
+      Object.keys(alineacion).forEach(pos => alineacion[pos] = null);
+      renderZonas();
+      renderJugadoresDisponibles();
+      mensaje.textContent = 'Alineación limpiada. Todos los jugadores están en el banquillo.';
+      mensaje.style.color = 'green';
+    };
   const zonas = {
     portero: alineacionSection.querySelector('.zona-drop[data-pos="portero"]'),
     defensa1: alineacionSection.querySelector('.zona-drop[data-pos="defensa1"]'),
