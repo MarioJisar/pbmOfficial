@@ -208,6 +208,13 @@ async function inicializarFantasy() {
           jugadoresLista.appendChild(carta);
         });
       }
+      // Restricción de plantilla
+      if (plantilla.length > 7) {
+        mensaje.style.color = 'red';
+        mensaje.textContent = '¡Tienes más de 7 jugadores en plantilla! Solo puedes tener 5 en el campo y 2 en el banquillo. Debes vender jugadores.';
+      } else {
+        mensaje.textContent = '';
+      }
     }
     renderMisJugadores(plantillaUsuario);
     mostrarAlineacionSection(plantillaUsuario);
@@ -300,7 +307,14 @@ function inicializarMercado(user, plantillaUsuario, mercado, presupuesto) {
         btn.style.borderRadius = '4px';
         btn.style.padding = '0.3em 1em';
         btn.style.cursor = 'pointer';
-        btn.onclick = async () => { await comprarJugador(j, coste, false, i); };
+        // Bloquear compra si plantilla llena
+        if (plantillaUsuario.length >= 7) {
+          btn.disabled = true;
+          btn.style.background = '#ccc';
+          btn.textContent = 'Máximo 7 jugadores';
+        } else {
+          btn.onclick = async () => { await comprarJugador(j, coste, false, i); };
+        }
         acciones.appendChild(btn);
       } else {
         acciones.innerHTML = `<span style=\"color:gray\">Ya en tu plantilla</span>`;
@@ -528,69 +542,145 @@ function inicializarMercado(user, plantillaUsuario, mercado, presupuesto) {
 function mostrarAlineacionSection(jugadores) {
   const alineacionSection = document.getElementById('alineacion-section');
   alineacionSection.style.display = 'block';
-  const porteroSel = document.getElementById('pos-portero');
-  const campoSels = [
-    document.getElementById('pos-campo-1'),
-    document.getElementById('pos-campo-2'),
-    document.getElementById('pos-campo-3'),
-    document.getElementById('pos-campo-4')
-  ];
+  const zonas = {
+    portero: alineacionSection.querySelector('.zona-drop[data-pos="portero"]'),
+    defensa1: alineacionSection.querySelector('.zona-drop[data-pos="defensa1"]'),
+    defensa2: alineacionSection.querySelector('.zona-drop[data-pos="defensa2"]'),
+    atacante1: alineacionSection.querySelector('.zona-drop[data-pos="atacante1"]'),
+    atacante2: alineacionSection.querySelector('.zona-drop[data-pos="atacante2"]')
+  };
+  const disponiblesDiv = document.getElementById('jugadores-disponibles');
+  const mensaje = document.getElementById('alineacion-mensaje');
 
-  // Opciones para selects
-  function setOptions(select, jugadores, selected) {
-    select.innerHTML = '<option value="">--Selecciona--</option>';
-    jugadores.forEach(j => {
-      const opt = document.createElement('option');
-      opt.value = j;
-      opt.textContent = j;
-      if (selected === j) opt.selected = true;
-      select.appendChild(opt);
-    });
-  }
-
-  // Obtener valores previos (de localStorage, opcional migrar a Firestore)
+  // Obtener valores previos (de localStorage)
   const usuario = JSON.parse(localStorage.getItem('usuarioLogueadoPBM'));
   const alineacionGuardada = JSON.parse(localStorage.getItem('alineacionPBM_' + (usuario?.username || ''))) || {};
+  // Estado de alineación actual
+  let alineacion = {
+    portero: alineacionGuardada.portero || null,
+    defensa1: alineacionGuardada.defensa1 || null,
+    defensa2: alineacionGuardada.defensa2 || null,
+    atacante1: alineacionGuardada.atacante1 || null,
+    atacante2: alineacionGuardada.atacante2 || null
+  };
 
-  setOptions(porteroSel, jugadores, alineacionGuardada.portero);
-  campoSels.forEach((sel, idx) => {
-    setOptions(sel, jugadores, alineacionGuardada['campo'+(idx+1)]);
-  });
-
-  function actualizarSelects() {
-    const usados = [porteroSel.value, ...campoSels.map(s=>s.value)].filter(Boolean);
-    setOptions(porteroSel, jugadores.filter(j => !usados.includes(j) || porteroSel.value === j), porteroSel.value);
-    campoSels.forEach((sel, idx) => {
-      setOptions(sel, jugadores.filter(j => !usados.includes(j) || sel.value === j), sel.value);
+  // Renderizar cartas disponibles
+  function renderJugadoresDisponibles() {
+    disponiblesDiv.innerHTML = '';
+    jugadores.forEach(j => {
+      if (Object.values(alineacion).includes(j)) return; // Ya alineado
+      const stats = estadisticasPBM.find(p => p.nombre === j);
+      const puntos = calcularPuntos(stats);
+      const coste = calcularCoste(puntos);
+      const carta = document.createElement('div');
+      carta.className = 'carta-jugador';
+      carta.draggable = true;
+      carta.dataset.nombre = j;
+      carta.innerHTML = `
+        <img src="img/${j.replace(/ /g, '_').toLowerCase()}.jpeg" alt="Foto de ${j}" onerror="this.src='img/0b1d0f0076aa13c3fd8b83cca83594635c8e2c59a1b9dc61e73dd5994279b88c.jpeg'">
+        <div class="nombre">${j}</div>
+        <div class="puntos">Puntos: <b>${puntos}</b></div>
+        <div class="coste">Coste: <b>${coste}M</b></div>
+        <div class="stats">Goles: ${stats.goles} | Asist: ${stats.asistencias} | MVPs: ${stats.mvps}</div>
+      `;
+      carta.addEventListener('dragstart', e => {
+        carta.classList.add('dragging');
+        e.dataTransfer.setData('text/plain', j);
+      });
+      carta.addEventListener('dragend', () => {
+        carta.classList.remove('dragging');
+      });
+      disponiblesDiv.appendChild(carta);
     });
   }
-  porteroSel.onchange = actualizarSelects;
-  campoSels.forEach(sel => sel.onchange = actualizarSelects);
 
-  function guardarAlineacionAuto() {
-    const portero = porteroSel.value;
-    const campo = campoSels.map(s=>s.value);
-    const mensaje = document.getElementById('alineacion-mensaje');
-    if (!portero || campo.some(c=>!c)) {
+  // Renderizar cartas en zonas
+  function renderZonas() {
+  Object.entries(zonas).forEach(([pos, zona]) => {
+    zona.innerHTML = ""; // Limpia la zona antes de añadir la carta
+    zona.classList.remove('drag-over');
+    const jugador = alineacion[pos];
+    if (jugador) {
+      const stats = estadisticasPBM.find(p => p.nombre === jugador);
+      const puntos = calcularPuntos(stats);
+      const coste = calcularCoste(puntos);
+      const carta = document.createElement('div');
+      carta.className = 'carta-jugador';
+      carta.innerHTML = `
+        <img src="img/${jugador.replace(/ /g, '_').toLowerCase()}.jpeg" alt="Foto de ${jugador}" onerror="this.src='img/0b1d0f0076aa13c3fd8b83cca83594635c8e2c59a1b9dc61e73dd5994279b88c.jpeg'">
+        <div class="nombre">${jugador}</div>
+        <div class="puntos">Puntos: <b>${puntos}</b></div>
+        <div class="coste">Coste: <b>${coste}M</b></div>
+        <div class="stats">Goles: ${stats.goles} | Asist: ${stats.asistencias} | MVPs: ${stats.mvps}</div>
+      `;
+      // Botón para quitar
+      const btn = document.createElement('button');
+      btn.className = 'remove-carta';
+      btn.innerHTML = '&times;';
+      btn.title = 'Quitar de la alineación';
+      btn.onclick = () => {
+        alineacion[pos] = null;
+        renderZonas();
+        renderJugadoresDisponibles();
+      };
+      zona.appendChild(btn);
+      zona.appendChild(carta);
+    }
+  });
+}
+
+  // Drag & drop listeners
+  Object.entries(zonas).forEach(([pos, zona]) => {
+    zona.ondragover = e => {
+      e.preventDefault();
+      zona.classList.add('drag-over');
+    };
+    zona.ondragleave = () => zona.classList.remove('drag-over');
+    zona.ondrop = e => {
+      e.preventDefault();
+      zona.classList.remove('drag-over');
+      const nombre = e.dataTransfer.getData('text/plain');
+      if (!nombre) return;
+      // No permitir repetir
+      if (Object.values(alineacion).includes(nombre)) return;
+      alineacion[pos] = nombre;
+      renderZonas();
+      renderJugadoresDisponibles();
+    };
+  });
+
+  // Guardar alineación
+  document.getElementById('guardar-alineacion').onclick = async function() {
+    const valores = Object.values(alineacion);
+    if (valores.some(v => !v)) {
       mensaje.style.color = 'red';
       mensaje.textContent = 'Debes colocar todos los jugadores en una posición.';
       return;
     }
-    const todos = [portero, ...campo];
-    if (new Set(todos).size !== 5) {
+    if (new Set(valores).size !== 5) {
       mensaje.style.color = 'red';
       mensaje.textContent = 'No puedes repetir jugadores en varias posiciones.';
       return;
     }
     const usuario = JSON.parse(localStorage.getItem('usuarioLogueadoPBM'));
-    localStorage.setItem('alineacionPBM_' + (usuario?.username || ''), JSON.stringify({portero, campo1: campo[0], campo2: campo[1], campo3: campo[2], campo4: campo[3]}));
-    mensaje.style.color = 'green';
-    mensaje.textContent = '¡Alineación guardada automáticamente!';
+    localStorage.setItem('alineacionPBM_' + (usuario?.username || ''), JSON.stringify(alineacion));
+    // Guardar en Firestore
+    try {
+      if (usuario && usuario.uid) {
+        await setDoc(doc(db, "usuarios", usuario.uid), { alineacion }, { merge: true });
+      }
+      mensaje.style.color = 'green';
+      mensaje.textContent = '¡Alineación guardada!';
+    } catch (e) {
+      mensaje.style.color = 'red';
+      mensaje.textContent = 'Error guardando en la nube.';
+    }
     inicializarFantasy();
-  }
-  porteroSel.onchange = guardarAlineacionAuto;
-  campoSels.forEach(sel => sel.onchange = guardarAlineacionAuto);
-  actualizarSelects();
+  };
+
+  renderZonas();
+  renderJugadoresDisponibles();
+  mensaje.textContent = '';
 }
 
 // --- PUNTOS Y COSTE ---
