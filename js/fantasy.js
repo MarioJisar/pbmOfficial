@@ -1,3 +1,37 @@
+// Consulta y muestra la alineación de otro usuario por UID
+export async function mostrarAlineacionDeUsuario(uid, contenedorId = 'alineacion-externa') {
+  const docSnap = await getDoc(doc(db, "usuarios", uid));
+  if (!docSnap.exists()) {
+    alert("Usuario no encontrado");
+    return;
+  }
+  const data = docSnap.data();
+  const alineacion = data.alineacion;
+  const cont = document.getElementById(contenedorId);
+  if (!cont) return;
+  cont.innerHTML = '';
+  if (!alineacion) {
+    cont.innerHTML = '<p>Este usuario no tiene alineación guardada.</p>';
+    return;
+  }
+  Object.entries(alineacion).forEach(([pos, nombre]) => {
+    if (!nombre) return;
+    const stats = estadisticasPBM.find(j => j.nombre === nombre);
+    const puntos = calcularPuntos(stats);
+    const coste = calcularCoste(puntos);
+    const carta = document.createElement('div');
+    carta.className = 'carta-jugador';
+    carta.innerHTML = `
+      <img src="img/${nombre.replace(/ /g, '_').toLowerCase()}.jpeg" alt="Foto de ${nombre}" onerror="this.src='img/0b1d0f0076aa13c3fd8b83cca83594635c8e2c59a1b9dc61e73dd5994279b88c.jpeg'">
+      <div class="nombre">${nombre}</div>
+      <div class="puntos">Puntos: <b>${puntos}</b></div>
+      <div class="coste">Coste: <b>${coste}M</b></div>
+      <div class="stats">Goles: ${stats?.goles ?? 0} | Asist: ${stats?.asistencias ?? 0} | MVPs: ${stats?.mvps ?? 0}</div>
+      <div class="pos-label">${pos.charAt(0).toUpperCase() + pos.slice(1)}</div>
+    `;
+    cont.appendChild(carta);
+  });
+}
 // --- FIREBASE/FIRESTORE INTEGRACIÓN BASE ---
 import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove, onSnapshot } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
@@ -115,6 +149,20 @@ fetch('json/estadisticas.json')
 
 // --- FANTASY PRINCIPAL ---
 async function inicializarFantasy() {
+    // Guardar plantilla al hacer submit en el formulario
+    const plantillaForm = document.getElementById('plantilla-form');
+    if (plantillaForm) {
+      plantillaForm.onsubmit = async function(e) {
+        e.preventDefault();
+        // Recoge los jugadores actuales de la plantilla
+        // (ya están en plantillaUsuario)
+        if (user && user.uid) {
+          await guardarPlantillaFirestore(user.uid, plantillaUsuario);
+          mensaje.style.color = 'green';
+          mensaje.textContent = '¡Plantilla guardada en la nube!';
+        }
+      };
+    }
   onAuthStateChanged(auth, async (user) => {
     const bienvenida = document.getElementById('bienvenida');
     const loginReq = document.getElementById('login-requerido');
@@ -553,8 +601,11 @@ function mostrarAlineacionSection(jugadores) {
       const guardarBtn = document.getElementById('guardar-alineacion');
       guardarBtn.parentNode.insertBefore(limpiarBtn, guardarBtn.nextSibling);
     }
-    limpiarBtn.onclick = function() {
+    limpiarBtn.onclick = async function() {
       Object.keys(alineacion).forEach(pos => alineacion[pos] = null);
+      if (usuario && usuario.uid) {
+        await setDoc(doc(db, "usuarios", usuario.uid), { alineacionDraft: alineacion }, { merge: true });
+      }
       renderZonas();
       renderJugadoresDisponibles();
       mensaje.textContent = 'Alineación limpiada. Todos los jugadores están en el banquillo.';
@@ -574,13 +625,25 @@ function mostrarAlineacionSection(jugadores) {
   const usuario = JSON.parse(localStorage.getItem('usuarioLogueadoPBM'));
   const alineacionGuardada = JSON.parse(localStorage.getItem('alineacionPBM_' + (usuario?.username || ''))) || {};
   // Estado de alineación actual
-  let alineacion = {
-    portero: alineacionGuardada.portero || null,
-    defensa1: alineacionGuardada.defensa1 || null,
-    defensa2: alineacionGuardada.defensa2 || null,
-    atacante1: alineacionGuardada.atacante1 || null,
-    atacante2: alineacionGuardada.atacante2 || null
-  };
+    let alineacion = {
+      portero: alineacionGuardada.portero || null,
+      defensa1: alineacionGuardada.defensa1 || null,
+      defensa2: alineacionGuardada.defensa2 || null,
+      atacante1: alineacionGuardada.atacante1 || null,
+      atacante2: alineacionGuardada.atacante2 || null
+    };
+
+    // Listener en tiempo real para la alineación draft
+    if (usuario && usuario.uid) {
+      onSnapshot(doc(db, "usuarios", usuario.uid), (docSnap) => {
+        const data = docSnap.data();
+        if (data && data.alineacionDraft) {
+          alineacion = { ...data.alineacionDraft };
+          renderZonas();
+          renderJugadoresDisponibles();
+        }
+      });
+    }
 
   // Renderizar cartas disponibles
   function renderJugadoresDisponibles() {
@@ -636,11 +699,14 @@ function mostrarAlineacionSection(jugadores) {
       btn.className = 'remove-carta';
       btn.innerHTML = '&times;';
       btn.title = 'Quitar de la alineación';
-      btn.onclick = () => {
-        alineacion[pos] = null;
-        renderZonas();
-        renderJugadoresDisponibles();
-      };
+        btn.onclick = async () => {
+          alineacion[pos] = null;
+          if (usuario && usuario.uid) {
+            await setDoc(doc(db, "usuarios", usuario.uid), { alineacionDraft: alineacion }, { merge: true });
+          }
+          renderZonas();
+          renderJugadoresDisponibles();
+        };
       zona.appendChild(btn);
       zona.appendChild(carta);
     }
@@ -654,7 +720,7 @@ function mostrarAlineacionSection(jugadores) {
       zona.classList.add('drag-over');
     };
     zona.ondragleave = () => zona.classList.remove('drag-over');
-    zona.ondrop = e => {
+    zona.ondrop = async e => {
       e.preventDefault();
       zona.classList.remove('drag-over');
       const nombre = e.dataTransfer.getData('text/plain');
@@ -662,6 +728,9 @@ function mostrarAlineacionSection(jugadores) {
       // No permitir repetir
       if (Object.values(alineacion).includes(nombre)) return;
       alineacion[pos] = nombre;
+      if (usuario && usuario.uid) {
+        await setDoc(doc(db, "usuarios", usuario.uid), { alineacionDraft: alineacion }, { merge: true });
+      }
       renderZonas();
       renderJugadoresDisponibles();
     };
@@ -682,13 +751,20 @@ function mostrarAlineacionSection(jugadores) {
     }
     const usuario = JSON.parse(localStorage.getItem('usuarioLogueadoPBM'));
     localStorage.setItem('alineacionPBM_' + (usuario?.username || ''), JSON.stringify(alineacion));
-    // Guardar en Firestore
+    // Guardar en Firestore alineación y plantilla
     try {
       if (usuario && usuario.uid) {
-        await setDoc(doc(db, "usuarios", usuario.uid), { alineacion }, { merge: true });
+        // Obtener plantilla actual del usuario (jugadores en propiedad)
+        let plantilla = [];
+        if (typeof window.plantillaUsuario !== 'undefined') {
+          plantilla = window.plantillaUsuario;
+        } else if (typeof jugadores !== 'undefined') {
+          plantilla = jugadores;
+        }
+        await setDoc(doc(db, "usuarios", usuario.uid), { alineacion, plantilla }, { merge: true });
       }
       mensaje.style.color = 'green';
-      mensaje.textContent = '¡Alineación guardada!';
+      mensaje.textContent = '¡Alineación y plantilla guardadas!';
     } catch (e) {
       mensaje.style.color = 'red';
       mensaje.textContent = 'Error guardando en la nube.';
