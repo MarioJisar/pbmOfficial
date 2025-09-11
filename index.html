@@ -24,7 +24,7 @@
         <h1>PBM 2.0</h1>
         <p class="lema">Eu farei 10x se for preciso. Eles não estão preparados.</p>
         <div style="margin-top: 1em;">
-          <a href="login.html"><button type="button">Login</button></a>
+          <!--<a href="login.html"><button type="button">Login</button></a>-->
           <a href="fantasy.html"><button type="button">Fantasy</button></a>
         </div>
       </div>
@@ -134,27 +134,6 @@
       <p>Fundado en 2015, PBM 2.0 ha sido un emblema de la ciudad por más de 10 añazos.</p>
     </section>
   </main>
-  <section id="zona-usuario" style="text-align: center; margin-top: 3rem;">
-    <button id="btn-login" onclick="window.location.href='login.html'">Iniciar sesión / Registrarse</button>
-    <button id="btn-fantasy" onclick="window.location.href='fantasy.html'" style="display:none;">Fantasy
-      Football</button>
-    <button id="btn-logout" style="display:none;">Cerrar sesión</button>
-  </section>
-  <script>
-    // Mostrar u ocultar botones según el estado de sesión
-    const isLoggedIn = false; // Cambia esto según el estado de sesión real
-
-    document.getElementById('btn-login').style.display = isLoggedIn ? 'none' : 'block';
-    document.getElementById('btn-fantasy').style.display = isLoggedIn ? 'block' : 'none';
-    document.getElementById('btn-logout').style.display = isLoggedIn ? 'block' : 'none';
-
-    // Función para cerrar sesión
-    document.getElementById('btn-logout').addEventListener('click', () => {
-      // Aquí iría la lógica para cerrar sesión
-      alert('Sesión cerrada');
-      window.location.reload(); // Recargar la página para actualizar el estado
-    });
-  </script>
   </section>
   <footer>
     <p style="color: bisque;">&copy; 2025 PBM 2.0. Todos los derechos reservados.</p>
@@ -166,18 +145,6 @@
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
   import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
   // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBhILwOFVq14nGlg5MYm7eLDuOKy_IdNfA",
-    authDomain: "pbmofficial-a22a1.firebaseapp.com",
-    projectId: "pbmofficial-a22a1",
-    storageBucket: "pbmofficial-a22a1.firebasestorage.app",
-    messagingSenderId: "982178990497",
-    appId: "1:982178990497:web:13f9575e1f90f84a6263e0",
-    measurementId: "G-95G6CVQ0KE"
-  };
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
