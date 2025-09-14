@@ -27,49 +27,6 @@
       <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
     </section>
   </main>
-  <script defer src="js/registro.js"></script>
+  <script type="module" src="js/registro.js"></script>
 </body>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
-  import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBhILwOFVq14nGlg5MYm7eLDuOKy_IdNfA",
-    authDomain: "pbmofficial-a22a1.firebaseapp.com",
-    projectId: "pbmofficial-a22a1",
-    storageBucket: "pbmofficial-a22a1.firebasestorage.app",
-    messagingSenderId: "982178990497",
-    appId: "1:982178990497:web:13f9575e1f90f84a6263e0",
-    measurementId: "G-95G6CVQ0KE"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-
-  const auth = getAuth(app);
-  document.getElementById('registro-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const nombre = document.getElementById('nombre').value;
-    const mensaje = document.getElementById('registro-mensaje');
-    mensaje.textContent = '';
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(userCredential.user, { displayName: nombre });
-      mensaje.style.color = 'green';
-      mensaje.textContent = '¡Registro exitoso! Redirigiendo...';
-      setTimeout(() => { window.location.href = 'login.html'; }, 1200);
-    } catch (error) {
-      mensaje.style.color = 'red';
-      mensaje.textContent = 'Error en el registro: ' + (error.message || error.code);
-    }
-  });
-</script>
 </html>
