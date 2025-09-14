@@ -6,7 +6,7 @@ export async function mostrarAlineacionDeUsuario(uid, contenedorId = 'alineacion
     return;
   }
   const data = docSnap.data();
-  const alineacion = data.alineacion;
+  const alineacion = data.alineacionDraft;
   const cont = document.getElementById(contenedorId);
   if (!cont) return;
   cont.innerHTML = '';
@@ -33,23 +33,9 @@ export async function mostrarAlineacionDeUsuario(uid, contenedorId = 'alineacion
   });
 }
 // --- FIREBASE/FIRESTORE INTEGRACIÓN BASE ---
-import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove, onSnapshot } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-// Configuración igual que en fantasy.html
-const firebaseConfig = {
-  apiKey: "AIzaSyBhILwOFVq14nGlg5MYm7eLDuOKy_IdNfA",
-  authDomain: "pbmofficial-a22a1.firebaseapp.com",
-  projectId: "pbmofficial-a22a1",
-  storageBucket: "pbmofficial-a22a1.firebasestorage.app",
-  messagingSenderId: "982178990497",
-  appId: "1:982178990497:web:13f9575e1f90f84a6263e0",
-  measurementId: "G-95G6CVQ0KE"
-};
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+import { db, auth } from '../firebase/firebase-config.js';
+import { doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove, onSnapshot } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 // --- FIRESTORE HELPERS ---
 const JORNADA_MAX = 5;
@@ -586,31 +572,21 @@ function inicializarMercado(user, plantillaUsuario, mercado, presupuesto) {
   mostrarPlantillaCartas(plantillaUsuario);
 }
 
-// --- ALINEACIÓN (mantiene localStorage, pero puede migrarse a Firestore si se desea) ---
-function mostrarAlineacionSection(jugadores) {
+
+// --- ALINEACIÓN (solo Firestore, sin localStorage) ---
+async function mostrarAlineacionSection(jugadores) {
   const alineacionSection = document.getElementById('alineacion-section');
   alineacionSection.style.display = 'block';
-    // Botón limpiar plantilla
-    let limpiarBtn = document.getElementById('limpiar-alineacion');
-    if (!limpiarBtn) {
-      limpiarBtn = document.createElement('button');
-      limpiarBtn.id = 'limpiar-alineacion';
-      limpiarBtn.type = 'button';
-      limpiarBtn.textContent = 'Limpiar plantilla';
-      limpiarBtn.style.marginLeft = '1em';
-      const guardarBtn = document.getElementById('guardar-alineacion');
-      guardarBtn.parentNode.insertBefore(limpiarBtn, guardarBtn.nextSibling);
-    }
-    limpiarBtn.onclick = async function() {
-      Object.keys(alineacion).forEach(pos => alineacion[pos] = null);
-      if (usuario && usuario.uid) {
-        await setDoc(doc(db, "usuarios", usuario.uid), { alineacionDraft: alineacion }, { merge: true });
-      }
-      renderZonas();
-      renderJugadoresDisponibles();
-      mensaje.textContent = 'Alineación limpiada. Todos los jugadores están en el banquillo.';
-      mensaje.style.color = 'green';
-    };
+  let limpiarBtn = document.getElementById('limpiar-alineacion');
+  if (!limpiarBtn) {
+    limpiarBtn = document.createElement('button');
+    limpiarBtn.id = 'limpiar-alineacion';
+    limpiarBtn.type = 'button';
+    limpiarBtn.textContent = 'Limpiar plantilla';
+    limpiarBtn.style.marginLeft = '1em';
+    const guardarBtn = document.getElementById('guardar-alineacion');
+    guardarBtn.parentNode.insertBefore(limpiarBtn, guardarBtn.nextSibling);
+  }
   const zonas = {
     portero: alineacionSection.querySelector('.zona-drop[data-pos="portero"]'),
     defensa1: alineacionSection.querySelector('.zona-drop[data-pos="defensa1"]'),
@@ -621,17 +597,32 @@ function mostrarAlineacionSection(jugadores) {
   const disponiblesDiv = document.getElementById('jugadores-disponibles');
   const mensaje = document.getElementById('alineacion-mensaje');
 
-  // Obtener valores previos (de localStorage)
-  const usuario = JSON.parse(localStorage.getItem('usuarioLogueadoPBM'));
-  const alineacionGuardada = JSON.parse(localStorage.getItem('alineacionPBM_' + (usuario?.username || ''))) || {};
-  // Estado de alineación actual
-    let alineacion = {
-      portero: alineacionGuardada.portero || null,
-      defensa1: alineacionGuardada.defensa1 || null,
-      defensa2: alineacionGuardada.defensa2 || null,
-      atacante1: alineacionGuardada.atacante1 || null,
-      atacante2: alineacionGuardada.atacante2 || null
-    };
+  // Obtener usuario autenticado de Firebase Auth
+  let usuario = null;
+  await new Promise(resolve => {
+    onAuthStateChanged(auth, user => {
+      usuario = user;
+      resolve();
+    });
+  });
+  let alineacion = {
+    portero: null,
+    defensa1: null,
+    defensa2: null,
+    atacante1: null,
+    atacante2: null
+  };
+  // Listener en tiempo real para la alineación draft
+  if (usuario && usuario.uid) {
+    onSnapshot(doc(db, "usuarios", usuario.uid), (docSnap) => {
+      const data = docSnap.data();
+      if (data && data.alineacionDraft) {
+        alineacion = { ...data.alineacionDraft };
+        renderZonas();
+        renderJugadoresDisponibles();
+      }
+    });
+  }
 
     // Listener en tiempo real para la alineación draft
     if (usuario && usuario.uid) {
@@ -749,8 +740,6 @@ function mostrarAlineacionSection(jugadores) {
       mensaje.textContent = 'No puedes repetir jugadores en varias posiciones.';
       return;
     }
-    const usuario = JSON.parse(localStorage.getItem('usuarioLogueadoPBM'));
-    localStorage.setItem('alineacionPBM_' + (usuario?.username || ''), JSON.stringify(alineacion));
     // Guardar en Firestore alineación y plantilla
     try {
       if (usuario && usuario.uid) {
