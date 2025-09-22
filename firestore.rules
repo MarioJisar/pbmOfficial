@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Verificar si el usuario está autenticado
+    function isAuth() {
+      return request.auth != null;
+    }
+    
+    // Verificar si el usuario es el propietario del documento
+    function isOwner(userId) {
+      return isAuth() && request.auth.uid == userId;
+    }
+
+    // Reglas para el mercado global
+    match /mercado/{document} {
+      allow read: if isAuth();
+      allow write: if isAuth();
+    }
+
+    // Reglas para usuarios
+    match /usuarios/{userId} {
+      allow read: if isAuth();
+      allow write: if isOwner(userId);
+    }
+
+    // Reglas para temporadas
+    match /temporadas/{document} {
+      allow read: if isAuth();
+      allow write: if isAuth();
+    }
+
+    // Por defecto, denegar todo lo demás
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
