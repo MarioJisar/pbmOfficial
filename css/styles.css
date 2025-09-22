@@ -1,4 +1,202 @@
-/* Casilla y etiqueta de posición en alineación fantasy */
+/* --- FANTASY LAYOUT --- */
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+.header-button-left {
+  float: left;
+  margin-right: 1em;
+  background: #1976d2;
+  color: white;
+}
+
+.header-button-right {
+  float: right;
+}
+
+.header-button-danger {
+  background: #b71c1c;
+  color: white;
+  margin-right: 1em;
+}
+
+/* --- CONFIRMACIÓN ELIMINAR --- */
+.confirmacion-eliminar {
+  background: #ffe9b3;
+  padding: 1em;
+  border: 2px solid #b71c1c;
+  margin: 1em 0;
+  text-align: center;
+}
+
+/* --- SECCIONES FANTASY --- */
+.fantasy-section {
+  margin-top: 2em;
+}
+
+.presupuesto-info {
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+/* Info de temporada */
+.info-temporada {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1em;
+  margin: 1.5em 0;
+  padding: 1em;
+  background: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.info-bloque {
+  padding: 1em;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.info-bloque h3 {
+  margin: 0 0 0.5em;
+  color: #2c3e50;
+  font-size: 1.2em;
+}
+
+.info-bloque p {
+  margin: 0.3em 0;
+  color: #666;
+}
+
+.estado-activo {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.estado-finalizada {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Tabla de puntuaciones */
+.tabla-puntuaciones {
+  margin-top: 2em;
+}
+
+.tabla-puntuaciones table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabla-puntuaciones th,
+.tabla-puntuaciones td {
+  padding: 0.8em;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.tabla-puntuaciones th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.tabla-puntuaciones tr:nth-child(even) {
+  background: #f8f9fa;
+}
+
+.tabla-puntuaciones tr:hover {
+  background: #f1f3f5;
+}
+
+.mejor-alineacion {
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* --- CAMPO DE FÚTBOL --- */
+.campo-futbol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  align-items: center;
+  padding: 1em 0;
+}
+
+.campo-layout {
+  display: flex;
+  justify-content: center;
+  gap: 1.5em;
+  width: 100%;
+  padding: 0.5em;
+}
+
+.campo-layout-top {
+  justify-content: center;
+}
+
+.campo-layout-bottom {
+  justify-content: center;
+  gap: 2em;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+/* Leyenda de símbolos */
+.leyenda-info {
+  margin: 2em 0;
+  padding: 1em;
+  background: #f5f5f5;
+  border-radius: 10px;
+  font-size: 0.9em;
+}
+
+.leyenda-titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+
+.info-icon {
+  cursor: help;
+  color: #1976d2;
+  font-size: 1.2em;
+}
+
+.leyenda-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1em;
+}
+
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.leyenda-item .emoji {
+  font-size: 1.2em;
+  width: 1.5em;
+  text-align: center;
+}
+
+.leyenda-item .texto {
+  color: #666;
+}
+
 .casilla-posicion {
   display: flex;
   flex-direction: column;
@@ -7,6 +205,50 @@
   width: 180px;
   min-width: 120px;
 }
+
+/* --- MODAL VENTA --- */
+.modal-venta {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-contenido {
+  background: #fff;
+  padding: 2em;
+  border-radius: 10px;
+  min-width: 300px;
+  max-width: 90vw;
+  margin: auto;
+}
+
+.modal-precio-input {
+  width: 80px;
+}
+
+.modal-precio-info {
+  margin-left: 1em;
+  color: #888;
+}
+
+.modal-botones {
+  margin-top: 1em;
+  display: flex;
+  gap: 1em;
+}
+
+.boton-confirmar {
+  background: #1a7f37;
+  color: #fff;
+}
+
 .pos-label {
   margin-top: 0.3em;
   font-size: 1em;
@@ -16,13 +258,48 @@
 }
 
 @media (max-width: 600px) {
-  .casilla-posicion {
-    width: 95vw;
-    max-width: 320px;
-    min-width: 100px;
+  .campo-futbol {
+    gap: 1em;
   }
+
+  .campo-layout {
+    gap: 1em;
+    padding: 0.5em;
+  }
+
+  .campo-layout-top {
+    margin-bottom: 1em;
+  }
+
+  .campo-layout-bottom {
+    gap: 0.8em;
+    padding: 0 0.5em;
+    justify-content: space-between;
+  }
+  
+  .casilla-posicion {
+    width: calc(50% - 0.4em);
+    min-width: 140px;
+    max-width: 160px;
+    margin: 0;
+  }
+
+  .campo-layout-top .casilla-posicion {
+    width: 160px;
+    max-width: 160px;
+  }
+  
   .pos-label {
     font-size: 0.95em;
+  }
+  
+  .leyenda-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .carta-jugador {
+    margin: 0;
+    width: 100%;
   }
 }
 /* --- FANTASY ALINEACION DRAG & DROP --- */
@@ -35,7 +312,7 @@
 }
 .zona-drop {
   width: 180px;
-  height: 220px;
+  height: 290px;
   border: 2px dashed #1976d2;
   border-radius: 10px;
   background: #e3f2fd;
@@ -54,10 +331,11 @@
 .zona-drop.drag-over {
   background: #bbdefb;
 }
+/* --- CARTAS DE JUGADORES --- */
 .carta-jugador {
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 2px 8px #0002;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 1em;
   width: 100%;
   height: 100%;
@@ -65,42 +343,85 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: relative;
   cursor: grab;
   user-select: none;
-  transition: box-shadow 0.2s, width 0.2s, height 0.2s;
+  transition: all 0.2s ease;
   box-sizing: border-box;
+}
+
+.carta-jugador:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 .carta-jugador img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 0.5em;
+  margin: 0.5em auto;
   background: #eee;
   display: block;
   box-shadow: 0 0 0 2px #fff, 0 2px 8px #0001;
   aspect-ratio: 1/1;
   overflow: hidden;
 }
-.carta-jugador .nombre {
+.carta-jugador .pos-label {
   font-weight: bold;
   font-size: 1.1em;
-  margin-bottom: 0.2em;
+  margin: 0.5em 0;
+  text-align: center;
 }
 .carta-jugador .puntos {
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
   color: #1a7f37;
   font-weight: bold;
-  margin-bottom: 0.2em;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.2em 0.5em;
+  border-radius: 0.5em;
 }
 .carta-jugador .coste {
   color: #b8860b;
-  margin-bottom: 0.2em;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 0.5em;
+  border-top: 1px solid #eee;
+  margin-top: 0.5em;
+  width: 100%;
 }
 .carta-jugador .stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em;
+  width: 100%;
   font-size: 0.95em;
-  margin-bottom: 0.2em;
+  margin-top: auto;
+}
+
+.carta-jugador .stats-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2em;
+}
+
+.carta-jugador .stats-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2em;
+}
+
+.carta-jugador .stat {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.carta-jugador .stat-icon {
+  font-size: 1.2em;
 }
 .carta-jugador .acciones {
   margin-top: 0.5em;
@@ -161,6 +482,8 @@
   .carta-jugador img {
     width: 48px;
     height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
   }
 }
 
