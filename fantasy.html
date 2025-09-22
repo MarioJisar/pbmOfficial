@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PBM Fantasy</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/ventas.css">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 
@@ -14,61 +15,119 @@
 
   <header>
     <h1>PBM Fantasy</h1>
-    <button id="logout-btn" style="float:right;">Cerrar sesión</button>
-    <button id="eliminar-usuario-btn" style="float:right; margin-right:1em; background:#b71c1c; color:white;">Eliminar
-      usuario</button>
-    <button id="ir-index-btn" style="float:left; margin-right:1em; background:#1976d2; color:white;">Inicio</button>
+    <div class="header-buttons">
+      <button id="ir-index-btn" class="header-button-left">Inicio</button>
+      <button id="eliminar-usuario-btn" class="header-button-right header-button-danger">Eliminar usuario</button>
+      <button id="logout-btn" class="header-button-right">Cerrar sesión</button>
+    </div>
   </header>
   <main>
-    <div id="confirmacion-eliminar"
-      style="display:none; background:#ffe9b3; padding:1em; border:2px solid #b71c1c; margin:1em 0; text-align:center;">
+    <div id="confirmacion-eliminar" class="confirmacion-eliminar" style="display:none;">
       <p>¿Seguro que quieres eliminar tu usuario y todos tus datos? Esta acción es irreversible.</p>
-      <button id="confirmar-eliminar-btn" style="background:#b71c1c; color:white;">Sí, eliminar</button>
-      <button id="cancelar-eliminar-btn">Cancelar</button>
+      <div class="modal-botones">
+        <button id="confirmar-eliminar-btn" class="boton-confirmar">Sí, eliminar</button>
+        <button id="cancelar-eliminar-btn">Cancelar</button>
+      </div>
     </div>
     <section id="bienvenida" style="display:none;">
       <h2>¡Bienvenido, <span id="nombre-usuario"></span>!</h2>
       <p>Crea tu plantilla fantasy solo con jugadores de PBM.</p>
+      
+      <!-- Info de temporada y jornada -->
+      <div id="info-temporada" class="info-temporada">
+        <div class="info-bloque temporada-actual">
+          <h3>Temporada <span id="numero-temporada">-</span></h3>
+          <p class="estado">Estado: <span id="estado-temporada">-</span></p>
+        </div>
+        
+        <div class="info-bloque jornada-actual">
+          <h3>Jornada <span id="numero-jornada">-</span> de <span id="total-jornadas">-</span></h3>
+          <p class="tiempo">Próximo mercado: <span id="proximo-mercado">-</span></p>
+        </div>
+        
+        <div class="info-bloque historial-puntos">
+          <h3>Mis Puntos</h3>
+          <p>Esta jornada: <span id="puntos-jornada">-</span></p>
+          <p>Total temporada: <span id="puntos-temporada">-</span></p>
+        </div>
+      </div>
+      
+      <!-- Tabla de mejores puntuaciones -->
+      <div id="tabla-puntuaciones" class="tabla-puntuaciones" style="display:none;">
+        <h3>Mejores Puntuaciones</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Pos</th>
+              <th>Usuario</th>
+              <th>Puntos</th>
+              <th>Mejor Alineación</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-puntuaciones">
+            <!-- Se llena dinámicamente -->
+          </tbody>
+        </table>
+      </div>
     </section>
     <section id="login-requerido" style="display:none;">
       <p>Debes iniciar sesión para jugar al Fantasy. <a href="login.html">Inicia sesión aquí</a></p>
     </section>
     <section id="fantasy-section" style="display:none;">
       <h2>Tu plantilla</h2>
-      <div id="presupuesto-section" style="margin-bottom:1em;">
+      <div id="presupuesto-section" class="presupuesto-info">
         <b>Presupuesto disponible:</b> <span id="presupuesto-usuario">0</span>
       </div>
       <form id="plantilla-form">
         <div id="jugadores-lista" class="cartas-jugadores"></div>
         <button type="submit">Actualizar jugadores</button>
       </form>
-      <div id="alineacion-section" style="display:none; margin-top:2em;">
-        <h3>Coloca tu plantilla en el campo</h3>
+      <div id="alineacion-section" class="fantasy-section" style="display:none;">
+        <div class="leyenda-titulo">
+          <h3>Coloca tu plantilla en el campo</h3>
+          <span class="info-icon" title="Información sobre la plantilla">ⓘ</span>
+        </div>
+
+        <div class="leyenda-info">
+          <div class="leyenda-grid">
+            <div class="leyenda-item">
+              <span class="emoji">⚽</span>
+              <span class="texto">Goles marcados</span>
+            </div>
+            <div class="leyenda-item">
+              <span class="emoji">👟</span>
+              <span class="texto">Asistencias</span>
+            </div>
+            <div class="leyenda-item">
+              <span class="emoji">🏆</span>
+              <span class="texto">MVP del partido</span>
+            </div>
+            <div class="leyenda-item">
+              <span class="emoji">💰</span>
+              <span class="texto">Valor del jugador</span>
+            </div>
+            <div class="leyenda-item">
+              <span class="emoji">📊</span>
+              <span class="texto">Puntos acumulados</span>
+            </div>
+          </div>
+        </div>
+
         <div id="campo-futbol" class="campo-futbol">
-          <div style="display:flex; justify-content:center;">
+          <div class="campo-layout campo-layout-top">
             <div class="casilla-posicion">
-              <div class="zona-drop" data-pos="portero"></div>
-              <div class="pos-label">Portero</div>
+              <div class="zona-drop" data-pos="atacante"></div>
+              <div class="pos-label">Atacante</div>
             </div>
           </div>
-          <div style="display:flex; gap:1em; justify-content:center; flex-wrap:wrap; margin-top:0.5em;">
+          <div class="campo-layout campo-layout-bottom">
             <div class="casilla-posicion">
-              <div class="zona-drop" data-pos="defensa1"></div>
-              <div class="pos-label">Defensa 1</div>
+              <div class="zona-drop" data-pos="defensa"></div>
+              <div class="pos-label">Defensa</div>
             </div>
             <div class="casilla-posicion">
-              <div class="zona-drop" data-pos="defensa2"></div>
-              <div class="pos-label">Defensa 2</div>
-            </div>
-          </div>
-          <div style="display:flex; gap:1em; justify-content:center; flex-wrap:wrap; margin-top:0.5em;">
-            <div class="casilla-posicion">
-              <div class="zona-drop" data-pos="atacante1"></div>
-              <div class="pos-label">Atacante 1</div>
-            </div>
-            <div class="casilla-posicion">
-              <div class="zona-drop" data-pos="atacante2"></div>
-              <div class="pos-label">Atacante 2</div>
+              <div class="zona-drop" data-pos="medio"></div>
+              <div class="pos-label">Medio</div>
             </div>
           </div>
         </div>
@@ -88,16 +147,15 @@
       </section>
 
       <!-- Modal para poner jugador en venta -->
-      <div id="modal-venta"
-        style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:#0008; z-index:1000; align-items:center; justify-content:center;">
-        <div style="background:#fff; padding:2em; border-radius:10px; min-width:300px; max-width:90vw; margin:auto;">
+      <div id="modal-venta" class="modal-venta">
+        <div class="modal-contenido">
           <h3>Poner jugador en venta</h3>
-          <p id="modal-jugador-nombre" style="font-weight:bold;"></p>
+          <p id="modal-jugador-nombre" class="modal-jugador"></p>
           <label for="modal-precio-venta">Precio de venta:</label>
-          <input type="number" id="modal-precio-venta" min="1" step="1" style="width:80px;">
-          <span id="modal-precio-mercado" style="margin-left:1em; color:#888;"></span>
-          <div style="margin-top:1em;">
-            <button id="modal-confirmar-venta" style="background:#1a7f37; color:#fff; margin-right:1em;">Poner en
+          <input type="number" id="modal-precio-venta" min="1" step="1" class="modal-precio-input">
+          <span id="modal-precio-mercado" class="modal-precio-info"></span>
+          <div class="modal-botones">
+            <button id="modal-confirmar-venta" class="boton-confirmar">Poner en
               venta</button>
             <button id="modal-cancelar-venta">Cancelar</button>
           </div>
@@ -182,7 +240,7 @@
 
         .zona-drop {
           width: 180px;
-          height: 220px;
+          height: 260px;
           border: 2px dashed #1976d2;
           border-radius: 10px;
           background: #e3f2fd;
@@ -226,11 +284,13 @@
       </style>
     </section>
   </main>
+  <!-- Scripts de Firebase y configuración -->
   <script type="module" src="js/fantasy.js"></script>
+  <script type="module" src="js/ventas.js"></script>
+  </script>
   <script type="module">
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-    // Firebase ya está inicializado en el script de abajo
-    const auth = getAuth();
+    import { auth, initializeFirebase } from './firebase/firebase-config.js';
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
     // Comprobar si el usuario está logueado
     onAuthStateChanged(auth, (user) => {
@@ -311,4 +371,11 @@
       }
     };
   </script>
+  <!-- Cargar Firebase primero -->
+  <script type="module" src="firebase/firebase-config.js"></script>
+  
+  <!-- Cargar scripts de la aplicación -->
+  <script type="module" src="js/utils.js"></script>
+  <script type="module" src="js/fantasy.js"></script>
+  <script type="module" src="js/ventas.js"></script>
 </body>
