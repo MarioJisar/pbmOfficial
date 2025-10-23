@@ -1,0 +1,39 @@
+[
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "GALACTICOS F.S",
+    "fecha": "2025-10-18T19:00:00",
+    "fin": "2025-10-18T20:00:00",
+    "lugar": "B.P. GALDOS",
+    "jornada": "Jornada 1",
+    "competicion": "Liga",
+    "resultado": "2 - 4"
+  },
+  {
+    "equipoLocal": "LEGENDARIOS FC",
+    "equipoVisitante": "PBM",
+    "fecha": "2025-10-25T19:00:00",
+    "fin": "2025-10-25T20:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 2",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "RACING DE PARQUECITO",
+    "fecha": "2025-11-08T18:00:00",
+    "fin": "2025-11-08T19:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 3",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "BEBESIKTAS",
+    "equipoVisitante": "PBM",
+    "fecha": "2025-06-07T17:00:00",
+    "fin": "2025-06-07T18:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 4",
+    "competicion": "Liga"
+  }
+]
