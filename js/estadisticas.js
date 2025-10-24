@@ -1,9 +1,21 @@
-// js/estadisticas.js
-
 document.addEventListener("DOMContentLoaded", () => {
   fetch("json/estadisticas.json")
     .then(res => res.json())
     .then(jugadores => {
+
+      // ORDENAR ANTES DE PINTAR
+      jugadores.sort((a, b) => {
+        // 1. MVPs
+        if (b.mvps !== a.mvps) return b.mvps - a.mvps;
+        // 2. Goles
+        if (b.goles !== a.goles) return b.goles - a.goles;
+        // 3. Asistencias
+        if (b.asistencias !== a.asistencias) return b.asistencias - a.asistencias;
+        // 4. Nombre (orden alfabético ascendente)
+        if (a.partidos_asistidos !== b.partidos_asistidos) return b.partidos_asistidos - a.partidos_asistidos;
+        return a.nombre.localeCompare(b.nombre);
+      });
+
       const contenedor = document.getElementById("contenedor-tabla");
       const tabla = document.createElement("table");
       tabla.id = "tabla-estadisticas";
@@ -33,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       tabla.appendChild(tbody);
       contenedor.appendChild(tabla);
-      
+
       new Tablesort(tabla);
     })
     .catch(err => console.error("Error cargando estadísticas:", err));
