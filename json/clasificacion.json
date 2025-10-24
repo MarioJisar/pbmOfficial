@@ -1,93 +1,93 @@
 [
   {
     "equipo": "PBM 2.0",
-    "partidos_jugados": 24,
-    "victorias": 3,
-    "derrotas": 19,
-    "empates": 2
+    "partidos_jugados": 1,
+    "victorias": 0,
+    "derrotas": 1,
+    "empates": 0
   },
   {
     "equipo": "LA TRIPLE C",
-    "partidos_jugados": 23,
-    "victorias": 16,
-    "derrotas": 4,
-    "empates": 3
+    "partidos_jugados": 1,
+    "victorias": 1,
+    "derrotas": 0,
+    "empates": 0
   },
   {
     "equipo": "USINDOS FC",
-    "partidos_jugados": 21,
-    "victorias": 15,
-    "derrotas": 3,
-    "empates": 3
+    "partidos_jugados": 1,
+    "victorias": 1,
+    "derrotas": 0,
+    "empates": 0
   },
   {
-    "equipo": "GALACTICOS F.S",
-    "partidos_jugados": 21,
-    "victorias": 14,
-    "derrotas": 5,
-    "empates": 2
+    "equipo": "BEBESIKTAS",
+    "partidos_jugados": 1,
+    "victorias": 1,
+    "derrotas": 0,
+    "empates": 0
   },
   {
-    "equipo": "EQUIPO DE FUTBOL F.C",
-    "partidos_jugados": 21,
-    "victorias": 14,
-    "derrotas": 6,
-    "empates": 1
+    "equipo": "FRANCO MASTANTUONO FC",
+    "partidos_jugados": 1,
+    "victorias": 1,
+    "derrotas": 0,
+    "empates": 0
   },
   {
     "equipo": "SALA EBANO",
-    "partidos_jugados": 21,
-    "victorias": 14,
-    "derrotas": 6,
-    "empates": 1
+    "partidos_jugados": 1,
+    "victorias": 1,
+    "derrotas": 0,
+    "empates": 0
   },
   {
     "equipo": "LICORETAS FC",
-    "partidos_jugados": 21,
-    "victorias": 11,
-    "derrotas": 7,
-    "empates": 2
+    "partidos_jugados": 0,
+    "victorias": 0,
+    "derrotas": 0,
+    "empates": 0
   },
   {
     "equipo": "TALES DE CUALES 2.0",
-    "partidos_jugados": 22,
-    "victorias": 9,
-    "derrotas": 10,
-    "empates": 3
+    "partidos_jugados": 1,
+    "victorias": 1,
+    "derrotas": 0,
+    "empates": 0
   },
   {
-    "equipo": "CELTIC TRANKI",
-    "partidos_jugados": 20,
-    "victorias": 7,
-    "derrotas": 10,
-    "empates": 3
+    "equipo": "LOSENTISTE FC",
+    "partidos_jugados": 1,
+    "victorias": 0,
+    "derrotas": 1,
+    "empates": 0
   },
   {
-    "equipo": "LOS LEGENDARIOS",
-    "partidos_jugados": 22,
-    "victorias": 5,
-    "derrotas": 15,
-    "empates": 2
+    "equipo": "LEGENDARIOS",
+    "partidos_jugados": 1,
+    "victorias": 0,
+    "derrotas": 1,
+    "empates": 0
   },
   {
-    "equipo": "ZIRDAM C.F",
-    "partidos_jugados": 12,
-    "victorias": 6,
-    "derrotas": 6,
+    "equipo": "FZIMIOS",
+    "partidos_jugados": 1,
+    "victorias": 0,
+    "derrotas": 1,
     "empates": 0
   },
   {
     "equipo": "RACING DE PARQUECITO",
-    "partidos_jugados": 20,
-    "victorias": 4,
-    "derrotas": 13,
-    "empates": 3
+    "partidos_jugados": 1,
+    "victorias": 0,
+    "derrotas": 1,
+    "empates": 0
   },
   {
-    "equipo": "SAN LUIS GONZAGA",
-    "partidos_jugados": 21,
-    "victorias": 4,
-    "derrotas": 15,
-    "empates": 2
+    "equipo": "MACETAS FC",
+    "partidos_jugados": 1,
+    "victorias": 0,
+    "derrotas": 1,
+    "empates": 0
   }
 ]
