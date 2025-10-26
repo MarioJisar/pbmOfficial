@@ -1,9 +1,9 @@
 [
   {
     "equipo": "PBM 2.0",
-    "partidos_jugados": 1,
+    "partidos_jugados": 2,
     "victorias": 0,
-    "derrotas": 1,
+    "derrotas": 2,
     "empates": 0
   },
   {
@@ -64,8 +64,8 @@
   },
   {
     "equipo": "LEGENDARIOS",
-    "partidos_jugados": 1,
-    "victorias": 0,
+    "partidos_jugados": 2,
+    "victorias": 1,
     "derrotas": 1,
     "empates": 0
   },
