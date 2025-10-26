@@ -1,7 +1,7 @@
 [
   {
     "equipoLocal": "PBM",
-    "equipoVisitante": "GALACTICOS F.S",
+    "equipoVisitante": "FRANCO MASTANTUONO FC",
     "fecha": "2025-10-18T19:00:00",
     "fin": "2025-10-18T20:00:00",
     "lugar": "B.P. GALDOS",
@@ -16,7 +16,8 @@
     "fin": "2025-10-25T20:00:00",
     "lugar": "La Granadilla",
     "jornada": "Jornada 2",
-    "competicion": "Liga"
+    "competicion": "Liga",
+    "resultado": "9 - 2"
   },
   {
     "equipoLocal": "PBM",
