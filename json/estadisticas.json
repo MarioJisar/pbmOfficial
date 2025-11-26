@@ -1,35 +1,35 @@
 [
   {
     "nombre": "Victor - 7",
-    "partidos_asistidos": 3,
+    "partidos_asistidos": 5,
     "goles": 1,
     "asistencias": 0,
     "mvps": 0
   },
   {
     "nombre": "Marcos - 42",
-    "partidos_asistidos": 3,
-    "goles": 1,
-    "asistencias": 1,
+    "partidos_asistidos": 5,
+    "goles": 2,
+    "asistencias": 2,
     "mvps": 1
   },
   {
     "nombre": "Javi - 12",
-    "partidos_asistidos": 1,
-    "goles": 0,
-    "asistencias": 0,
-    "mvps": 0
-  },
-  {
-    "nombre": "Diego - 19",
     "partidos_asistidos": 2,
     "goles": 0,
     "asistencias": 0,
     "mvps": 0
   },
   {
+    "nombre": "Diego - 19",
+    "partidos_asistidos": 4,
+    "goles": 0,
+    "asistencias": 0,
+    "mvps": 0
+  },
+  {
     "nombre": "Mario - 5",
-    "partidos_asistidos": 3,
+    "partidos_asistidos": 5,
     "goles": 0,
     "asistencias": 0,
     "mvps": 0
@@ -43,28 +43,28 @@
   },
   {
     "nombre": "Jeremy - 66",
-    "partidos_asistidos": 3,
+    "partidos_asistidos": 5,
     "goles": 0,
     "asistencias": 0,
     "mvps": 0
   },
   {
     "nombre": "Mario - 41",
-    "partidos_asistidos": 3,
-    "goles": 1,
+    "partidos_asistidos": 5,
+    "goles": 6,
     "asistencias": 0,
-    "mvps": 0
+    "mvps": 1
   },
   {
     "nombre": "Alejandro - 6",
-    "partidos_asistidos": 1,
+    "partidos_asistidos": 2,
     "goles": 0,
     "asistencias": 0,
     "mvps": 0
   },
   {
     "nombre": "Jorge - 37",
-    "partidos_asistidos": 3,
+    "partidos_asistidos": 5,
     "goles": 2,
     "asistencias": 1,
     "mvps": 1
@@ -78,21 +78,21 @@
   },
   {
     "nombre": "Samuel - 28",
-    "partidos_asistidos": 3,
+    "partidos_asistidos": 4,
     "goles": 0,
     "asistencias": 1,
     "mvps": 0
   },
   {
     "nombre": "Paco J - 31",
-    "partidos_asistidos": 3,
+    "partidos_asistidos": 4,
     "goles": 0,
     "asistencias": 1,
-    "mvps": 0
+    "mvps": 1
   },
   {
     "nombre": "Dani - 10",
-    "partidos_asistidos": 1,
+    "partidos_asistidos": 3,
     "goles": 0,
     "asistencias": 0,
     "mvps": 0
