@@ -26,7 +26,8 @@
     "fin": "2025-11-08T20:00:00",
     "lugar": "La Granadilla",
     "jornada": "Jornada 3",
-    "competicion": "Liga"
+    "competicion": "Liga",
+    "resultado": "2 - 7"
   },
   {
     "equipoLocal": "BEBESIKTAS",
@@ -35,6 +36,206 @@
     "fin": "2025-11-15T21:00:00",
     "lugar": "La Granadilla",
     "jornada": "Jornada 4",
+    "competicion": "Liga",
+    "resultado": "12 - 0"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "LICORETAS FC",
+    "fecha": "2025-11-22T20:00:00",
+    "fin": "2025-11-22T21:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 5",
+    "competicion": "Liga",
+    "resultado": "6 - 7"
+  },
+  {
+    "equipoLocal": "FZIMIOS",
+    "equipoVisitante": "PBM",
+    "fecha": "2025-11-29T21:00:00",
+    "fin": "2025-11-29T22:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 6",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "LA TRIPLE C",
+    "fecha": "2025-12-13T17:00:00",
+    "fin": "2025-12-13T18:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 7",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "USINDOS FC",
+    "equipoVisitante": "PBM",
+    "fecha": "2026-01-10T16:00:00",
+    "fin": "2026-01-10T17:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 8",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "DESCANSO",
+    "fecha": "2026-01-10T17:00:00",
+    "fin": "2026-01-24T15:00:00",
+    "lugar": "Casita PBM",
+    "jornada": "Jornada 9",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "SALA EBANO",
+    "fecha": "2026-01-24T16:00:00",
+    "fin": "2026-01-24T17:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 10",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "TALES DE CUALES 2.0",
+    "equipoVisitante": "PBM",
+    "fecha": "2026-01-31T17:00:00",
+    "fin": "2026-01-31T18:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 11",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "MACETAS FC",
+    "fecha": "2026-02-07T21:00:00",
+    "fin": "2026-02-07T22:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 12",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "LOSENTISTE FC",
+    "equipoVisitante": "PBM",
+    "fecha": "2026-02-14T17:00:00",
+    "fin": "2026-02-14T18:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 13",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "FRANCO MASTANTUONO FC",
+    "equipoVisitante": "PBM",
+    "fecha": "2026-02-21T20:00:00",
+    "fin": "2026-02-21T21:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 14",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "LEGENDARIOS",
+    "fecha": "2026-02-28T17:00:00",
+    "fin": "2026-02-28T18:00:00",
+    "lugar": "B.P. GALDOS",
+    "jornada": "Jornada 15",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "RACING DE PARQUECITO",
+    "equipoVisitante": "PBM",
+    "fecha": "2026-03-07T19:00:00",
+    "fin": "2026-03-07T20:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 16",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "BEBESIKTAS",
+    "fecha": "2026-03-14T18:00:00",
+    "fin": "2026-03-14T19:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 17",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "LICORETAS FC",
+    "equipoVisitante": "PBM",
+    "fecha": "2026-03-21T17:00:00",
+    "fin": "2026-03-21T18:00:00",
+    "lugar": "B.P. GALDOS",
+    "jornada": "Jornada 18",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "FZIMIOS",
+    "fecha": "2026-04-11T18:00:00",
+    "fin": "2026-04-11T19:00:00",
+    "lugar": "B.P. GALDOS",
+    "jornada": "Jornada 19",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "LA TRIPLE C",
+    "equipoVisitante": "PBM",
+    "fecha": "2026-04-18T17:00:00",
+    "fin": "2026-04-18T18:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 20",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "USINDOS FC",
+    "fecha": "2026-04-25T16:00:00",
+    "fin": "2026-04-25T17:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 21",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "DESCANSO",
+    "fecha": "2026-04-25T17:00:00",
+    "fin": "2026-05-16T15:00:00",
+    "lugar": "Casita PBM",
+    "jornada": "Jornada 22",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "SALA EBANO",
+    "equipoVisitante": "PBM",
+    "fecha": "2026-05-16T16:00:00",
+    "fin": "2026-05-16T17:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 23",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "TALES DE CUALES 2.0",
+    "fecha": "2026-05-23T17:00:00",
+    "fin": "2026-05-23T18:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 24",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "MACETAS FC",
+    "equipoVisitante": "PBM",
+    "fecha": "2026-05-30T21:00:00",
+    "fin": "2026-05-30T22:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 25",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "LOSENTISTE FC",
+    "fecha": "2026-06-06T18:00:00",
+    "fin": "2026-06-06T19:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 26",
     "competicion": "Liga"
   }
 ]
