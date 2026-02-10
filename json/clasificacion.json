@@ -1,93 +1,93 @@
 [
   {
     "equipo": "PBM 2.0",
-    "partidos_jugados": 5,
+    "partidos_jugados": 11,
     "victorias": 0,
-    "derrotas": 5,
+    "derrotas": 11,
     "empates": 0
   },
   {
     "equipo": "LA TRIPLE C",
-    "partidos_jugados": 4,
-    "victorias": 4,
-    "derrotas": 0,
-    "empates": 0
+    "partidos_jugados": 11,
+    "victorias": 9,
+    "derrotas": 1,
+    "empates": 1
   },
   {
     "equipo": "USINDOS FC",
-    "partidos_jugados": 5,
-    "victorias": 4,
-    "derrotas": 1,
-    "empates": 0
+    "partidos_jugados": 11,
+    "victorias": 8,
+    "derrotas": 2,
+    "empates": 1
   },
   {
     "equipo": "BEBESIKTAS",
-    "partidos_jugados": 5,
-    "victorias": 3,
+    "partidos_jugados": 11,
+    "victorias": 8,
     "derrotas": 2,
-    "empates": 0
+    "empates": 1
   },
   {
     "equipo": "FRANCO MASTANTUONO FC",
-    "partidos_jugados": 5,
-    "victorias": 1,
-    "derrotas": 4,
+    "partidos_jugados": 11,
+    "victorias": 2,
+    "derrotas": 9,
     "empates": 0
   },
   {
     "equipo": "SALA EBANO",
-    "partidos_jugados": 5,
-    "victorias": 2,
-    "derrotas": 3,
+    "partidos_jugados": 11,
+    "victorias": 5,
+    "derrotas": 6,
     "empates": 0
   },
   {
     "equipo": "LICORETAS FC",
-    "partidos_jugados": 4,
-    "victorias": 3,
-    "derrotas": 1,
+    "partidos_jugados": 11,
+    "victorias": 8,
+    "derrotas": 3,
     "empates": 0
   },
   {
     "equipo": "TALES DE CUALES 2.0",
-    "partidos_jugados": 5,
-    "victorias": 4,
-    "derrotas": 1,
-    "empates": 0
+    "partidos_jugados": 12,
+    "victorias": 9,
+    "derrotas": 2,
+    "empates": 1
   },
   {
     "equipo": "LOSENTISTE FC",
-    "partidos_jugados": 4,
-    "victorias": 3,
-    "derrotas": 1,
-    "empates": 0
-  },
-  {
-    "equipo": "LEGENDARIOS",
-    "partidos_jugados": 5,
-    "victorias": 2,
-    "derrotas": 3,
-    "empates": 0
-  },
-  {
-    "equipo": "FZIMIOS",
-    "partidos_jugados": 4,
-    "victorias": 0,
+    "partidos_jugados": 11,
+    "victorias": 7,
     "derrotas": 4,
     "empates": 0
   },
   {
-    "equipo": "RACING DE PARQUECITO",
-    "partidos_jugados": 5,
+    "equipo": "LEGENDARIOS",
+    "partidos_jugados": 11,
+    "victorias": 4,
+    "derrotas": 7,
+    "empates": 0
+  },
+  {
+    "equipo": "FZIMIOS",
+    "partidos_jugados": 11,
     "victorias": 2,
-    "derrotas": 3,
+    "derrotas": 8,
+    "empates": 1
+  },
+  {
+    "equipo": "RACING DE PARQUECITO",
+    "partidos_jugados": 11,
+    "victorias": 3,
+    "derrotas": 8,
     "empates": 0
   },
   {
     "equipo": "MACETAS FC",
-    "partidos_jugados": 4,
-    "victorias": 2,
-    "derrotas": 2,
-    "empates": 0
+    "partidos_jugados": 11,
+    "victorias": 4,
+    "derrotas": 6,
+    "empates": 1
   }
 ]
