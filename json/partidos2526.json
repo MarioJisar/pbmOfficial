@@ -165,7 +165,8 @@
     "fin": "2026-03-21T18:00:00",
     "lugar": "B.P. GALDOS",
     "jornada": "Jornada 18",
-    "competicion": "Liga"
+    "competicion": "Liga",
+    "resultado": "8 - 5"
   },
   {
     "equipoLocal": "PBM",
@@ -174,7 +175,8 @@
     "fin": "2026-04-11T19:00:00",
     "lugar": "B.P. GALDOS",
     "jornada": "Jornada 19",
-    "competicion": "Liga"
+    "competicion": "Liga",
+    "resultado": "0 - 3"
   },
   {
     "equipoLocal": "LA TRIPLE C",
