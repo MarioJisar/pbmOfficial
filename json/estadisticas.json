@@ -1,16 +1,16 @@
 [
   {
     "nombre": "Victor - 7",
-    "partidos_asistidos": 22,
+    "partidos_asistidos": 23,
     "goles": 8,
-    "asistencias": 2,
+    "asistencias": 3,
     "mvps": 2
   },
   {
     "nombre": "Marcos - 42",
-    "partidos_asistidos": 22,
+    "partidos_asistidos": 23,
     "goles": 8,
-    "asistencias": 7,
+    "asistencias": 10,
     "mvps": 3
   },
   {
@@ -22,14 +22,14 @@
   },
   {
     "nombre": "Diego - 19",
-    "partidos_asistidos": 18,
+    "partidos_asistidos": 19,
     "goles": 1,
     "asistencias": 1,
     "mvps": 0
   },
   {
     "nombre": "Mario - 5",
-    "partidos_asistidos": 22,
+    "partidos_asistidos": 23,
     "goles": 1,
     "asistencias": 4,
     "mvps": 1
@@ -43,17 +43,17 @@
   },
   {
     "nombre": "Jeremy - 66",
-    "partidos_asistidos": 20,
+    "partidos_asistidos": 21,
     "goles": 1,
     "asistencias": 1,
     "mvps": 2
   },
   {
     "nombre": "Mario - 41",
-    "partidos_asistidos": 22,
-    "goles": 22,
-    "asistencias": 9,
-    "mvps": 5
+    "partidos_asistidos": 23,
+    "goles": 28,
+    "asistencias": 10,
+    "mvps": 6
   },
   {
     "nombre": "Alejandro - 6",
@@ -64,28 +64,28 @@
   },
   {
     "nombre": "Jorge - 37",
-    "partidos_asistidos": 21,
+    "partidos_asistidos": 22,
     "goles": 4,
-    "asistencias": 1,
+    "asistencias": 3,
     "mvps": 2
   },
   {
     "nombre": "Jose - 22",
-    "partidos_asistidos": 21,
+    "partidos_asistidos": 22,
     "goles": 1,
     "asistencias": 1,
     "mvps": 0
   },
   {
     "nombre": "Samuel - 28",
-    "partidos_asistidos": 16,
+    "partidos_asistidos": 17,
     "goles": 1,
     "asistencias": 3,
     "mvps": 1
   },
   {
     "nombre": "Paco J - 31",
-    "partidos_asistidos": 18,
+    "partidos_asistidos": 19,
     "goles": 0,
     "asistencias": 1,
     "mvps": 1
