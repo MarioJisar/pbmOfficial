@@ -1,38 +1,38 @@
 [
   {
     "equipo": "PBM 2.0",
-    "partidos_jugados": 21,
+    "partidos_jugados": 23,
     "victorias": 0,
-    "derrotas": 19,
-    "empates": 2
+    "derrotas": 20,
+    "empates": 3
   },
   {
     "equipo": "LA TRIPLE C",
-    "partidos_jugados": 21,
+    "partidos_jugados": 22,
     "victorias": 15,
-    "derrotas": 4,
+    "derrotas": 5,
     "empates": 2
   },
   {
     "equipo": "USINDOS FC",
-    "partidos_jugados": 21,
+    "partidos_jugados": 22,
     "victorias": 15,
     "derrotas": 4,
     "empates": 2
   },
   {
     "equipo": "BEBESIKTAS",
-    "partidos_jugados": 22,
-    "victorias": 17,
+    "partidos_jugados": 23,
+    "victorias": 18,
     "derrotas": 4,
     "empates": 1
   },
   {
     "equipo": "FRANCO MASTANTUONO FC",
-    "partidos_jugados": 21,
+    "partidos_jugados": 22,
     "victorias": 3,
     "derrotas": 15,
-    "empates": 2
+    "empates": 3
   },
   {
     "equipo": "SALA EBANO",
@@ -43,50 +43,50 @@
   },
   {
     "equipo": "LICORETAS FC",
-    "partidos_jugados": 21,
-    "victorias": 17,
+    "partidos_jugados": 22,
+    "victorias": 18,
     "derrotas": 4,
     "empates": 0
   },
   {
     "equipo": "TALES DE CUALES 2.0",
-    "partidos_jugados": 22,
-    "victorias": 15,
+    "partidos_jugados": 23,
+    "victorias": 16,
     "derrotas": 5,
     "empates": 1
   },
   {
     "equipo": "LOSENTISTE FC",
-    "partidos_jugados": 21,
-    "victorias": 12,
+    "partidos_jugados": 22,
+    "victorias": 13,
     "derrotas": 8,
     "empates": 0
   },
   {
     "equipo": "LEGENDARIOS",
-    "partidos_jugados": 21,
+    "partidos_jugados": 22,
     "victorias": 6,
     "derrotas": 12,
     "empates": 3
   },
   {
     "equipo": "FZIMIOS",
-    "partidos_jugados": 21,
+    "partidos_jugados": 22,
+    "victorias": 5,
+    "derrotas": 15,
+    "empates": 2
+  },
+  {
+    "equipo": "RACING DE PARQUECITO",
+    "partidos_jugados": 22,
     "victorias": 5,
     "derrotas": 15,
     "empates": 1
   },
   {
-    "equipo": "RACING DE PARQUECITO",
-    "partidos_jugados": 21,
-    "victorias": 5,
-    "derrotas": 14,
-    "empates": 1
-  },
-  {
     "equipo": "MACETAS FC",
-    "partidos_jugados": 21,
-    "victorias": 7,
+    "partidos_jugados": 22,
+    "victorias": 8,
     "derrotas": 12,
     "empates": 2
   }
