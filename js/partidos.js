@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const jugados = partidos
         .filter(p => new Date(p.fin) < ahora)
-        .sort((a, b) => new Date(b.fecha) - new Date(a.fecha)) // del más nuevo al más viejo
+        .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
         .slice(0, 2);
 
       const proximos = partidos
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
         .slice(0, 2);
 
-      // Jugados
+//Jugados
       divJugados.innerHTML = "";
       if (jugados.length === 0) {
         divJugados.innerHTML = `<div class="partido vacio">Sin partidos recientes</div>`;
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         completarLista(divJugados, 2, "Sin partidos recientes");
       }
 
-      // Próximos
+//Siguientes
       divProximos.innerHTML = "";
       if (proximos.length === 0) {
         divProximos.innerHTML = `<div class="partido vacio">Sin próxima fecha</div><div class="partido vacio">Hasta la próxima temporada...</div>`;
@@ -34,8 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         proximos.forEach(p => divProximos.appendChild(crearPartidoProximo(p)));
         completarLista(divProximos, 2, "Hasta la próxima temporada...");
       }
-
-      // Actualización periódica para mostrar si hay partidos en directo
+// Comprobación de partidos
       setInterval(() => actualizarPartidosEnDirecto(proximos, divProximos), 30_000);
     })
     .catch(err => console.error("Error cargando partidos:", err));
