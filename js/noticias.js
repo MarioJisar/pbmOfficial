@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
             enlace.textContent = noticia.titulo;
             enlace.href = noticia.enlace;
 
-            // Abrir en nueva pestaña si es enlace externo
             if (/^https?:\/\//i.test(noticia.enlace)) {
               enlace.target = "_blank";
               enlace.rel = "noopener noreferrer";
