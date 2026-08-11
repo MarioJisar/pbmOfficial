@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("json/estadisticas.json")
+  fetch("json/estadisticas2526.json")
     .then(res => res.json())
     .then(jugadores => {
 
