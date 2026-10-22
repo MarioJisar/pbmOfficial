@@ -1,1 +1,66 @@
-
+[
+  {
+    "equipoLocal": "EQUIPO DE FUTBOL F.C",
+    "equipoVisitante": "PBM",
+    "fecha": "2026-10-17T21:00:00",
+    "fin": "2026-10-17T22:00:00",
+    "lugar": "LA Granadilla",
+    "jornada": "Jornada 1",
+    "competicion": "Liga",
+    "resultado": "6 - 2"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "RAYO MAJADAHONDA AFAR 4 FS",
+    "fecha": "2026-10-24T16:00:00",
+    "fin": "2026-10-24T17:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 2",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PATADITAS FC",
+    "equipoVisitante": "PBM",
+    "fecha": "2026-11-07T16:00:00",
+    "fin": "2026-11-07T17:00:00",
+    "lugar": "B.P: Galdos",
+    "jornada": "Jornada 3",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "Descanso",
+    "fecha": "2026-11-14T01:00:00",
+    "fin": "2026-11-14T23:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 4",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "LA BANGBANG",
+    "fecha": "2026-11-21T16:00:00",
+    "fin": "2026-11-21T17:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 5",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "MACETAS FC",
+    "equipoVisitante": "PBM",
+    "fecha": "2026-12-12T17:00:00",
+    "fin": "2026-12-12T18:00:00",
+    "lugar": "B.P. Galdos",
+    "jornada": "Jornada 6",
+    "competicion": "Liga"
+  },
+  {
+    "equipoLocal": "PBM",
+    "equipoVisitante": "TERRA FC",
+    "fecha": "2026-12-19T21:00:00",
+    "fin": "2026-12-19T22:00:00",
+    "lugar": "La Granadilla",
+    "jornada": "Jornada 7",
+    "competicion": "Liga"
+  }
+]
