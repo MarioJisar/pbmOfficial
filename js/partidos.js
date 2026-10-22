@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const divProximos = document.getElementById("lista-partidos");
   const divJugados = document.getElementById("partidos-jugados");
 
-  fetch("json/partidos2526.json")
+  fetch("json/partidos2627.json")
     .then(res => res.json())
     .then(partidos => {
       const ahora = new Date();
